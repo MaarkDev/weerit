@@ -5,7 +5,7 @@ router.get('/google', passport.authenticate('google', {scope: ['profile', 'email
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('http://localhost:3000/')
+    res.redirect('https://weerit.onrender.com/')
 })
 
 router.get('/login/success', (req, res) => {
@@ -29,13 +29,13 @@ router.get('/login/failed', (req, res) => {
 })
 
 router.get('/google/callback', passport.authenticate('google', {
-    successRedirect: 'http://localhost:3000/',
+    successRedirect: 'https://weerit.onrender.com/',
     failureRedirect: '/login/failed'
 }))
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('http://localhost:3000')
+    res.redirect('https://weerit.onrender.com/')
 })
 
 module.exports = router;

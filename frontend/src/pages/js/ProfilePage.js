@@ -23,7 +23,7 @@ const ProfilePage = () => {
     
 
     const logout = () => {
-        window.open('http://localhost:4000/auth/logout', '_self');
+        window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, '_self');
     }
 
     // tu je zahrnute aj fav

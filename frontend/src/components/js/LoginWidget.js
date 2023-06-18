@@ -6,7 +6,7 @@ const LoginWidget = () => {
     const [widgetClass, setWidgetClass] = useState('login-widget-wrapper');
 
     const google = () => {
-        window.open('http://localhost:4000/auth/google', '_self')
+        window.open(`${process.env.REACT_APP_API_URL}/auth/google`, '_self')
     }
 
     useEffect(() => {
