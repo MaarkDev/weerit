@@ -36,7 +36,7 @@ const HomePage = () => {
             pagenumber: nextPageNumber
         }
         const queryString = new URLSearchParams(qureyObj).toString();
-        await fetch(`http://localhost:4000/api/listings/getlistings?${queryString}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/getlistings?${queryString}`)
         .then(res => res.json())
         .then(data => setListingsContextArr(prev => prev.concat(data))).then(() => setIsFetching(false))
     }

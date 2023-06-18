@@ -31,7 +31,7 @@ const ProfilePage = () => {
         try {
           const user_id = user.uid;
       
-          const listingsResponse = await fetch(`http://localhost:4000/api/listings/mylistings?uid=${user_id}`);
+          const listingsResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/listings/mylistings?uid=${user_id}`);
           const listingsJson = await listingsResponse.json();
           if (listingsResponse.ok) {
             console.log(listingsJson);
@@ -39,7 +39,7 @@ const ProfilePage = () => {
             setIsLoading(false);
           }
       
-          const userResponse = await fetch(`http://localhost:4000/api/users/getuser/${user_id}`);
+          const userResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${user_id}`);
           
           const userJson = await userResponse.json();
           setRatingList(userJson.ratings)
@@ -48,7 +48,7 @@ const ProfilePage = () => {
             setFavListingsId(userJson.favorites);
             const queryString = userJson.favorites.map((item) => `favorites=${encodeURIComponent(item)}`).join('&');
             
-            const favoritesResponse = await fetch(`http://localhost:4000/api/listings/getfavorites?${queryString}`);
+            const favoritesResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/listings/getfavorites?${queryString}`);
             const favoritesJson = await favoritesResponse.json();
             setFavListings(favoritesJson);
           }

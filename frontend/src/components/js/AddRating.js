@@ -28,7 +28,7 @@ const AddRating = ({ setShowAddRating, showAddRating, user, setIsLoading, showRa
             uid: uuidv4()
         }
 
-        await fetch('http://localhost:4000/api/users/newuserrating', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/users/newuserrating`, {
             method: 'POST',
             body: JSON.stringify(reviewObj),
             headers: {

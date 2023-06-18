@@ -11,7 +11,7 @@ const AdminPage = () => {
     const [rerender, setRerender] = useState(false);
 
     const getReported = async () => {
-        fetch('http://localhost:4000/api/listings/getreported')
+        fetch(`${process.env.REACT_APP_API_URL}/api/listings/getreported`)
         .then((res) => res.json()).then((data) => {setReportedArr(data); setIsLoading(false)});
     }
 

@@ -55,8 +55,8 @@ const UserPage = () => {
 
     useEffect(() => {
         Promise.all([
-            fetch(`http://localhost:4000/api/users/getuser/${id}`).then(data => data.json()).then((data) => {setVisitedUser(data); setRatingList(data.ratings)}),
-            fetch(`http://localhost:4000/api/listings/mylistings?uid=${id}`).then(data => data.json()).then((data) => setVisitedUserListings(data))
+            fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${id}`).then(data => data.json()).then((data) => {setVisitedUser(data); setRatingList(data.ratings)}),
+            fetch(`${process.env.REACT_APP_API_URL}/api/listings/mylistings?uid=${id}`).then(data => data.json()).then((data) => setVisitedUserListings(data))
         ])
 
         console.log(visitedUser.ratings)

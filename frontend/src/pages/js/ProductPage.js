@@ -39,7 +39,7 @@ const ProductPage = () => {
     const navigate = useNavigate();
 
     const getUser = async () => {
-        await fetch(`http://localhost:4000/api/users/getuser/${user.uid}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${user.uid}`)
             .then((userRes) => {
                 return userRes.json();
             })
@@ -52,7 +52,7 @@ const ProductPage = () => {
     useEffect(() => {
         setIsLoading(true)
         const getProduct = async () => {
-            const res = await fetch(`http://localhost:4000/api/listings/getlisting?uid=${id}`);
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/listings/getlisting?uid=${id}`);
             const productJson = await res.json();
             if(res.ok){
                 setProduct(productJson[0])
@@ -70,7 +70,7 @@ const ProductPage = () => {
 
     const addToFavorites = async () => {
         setIsLoading(true)
-        await fetch('http://localhost:4000/api/listings/addfavorite', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/addfavorite`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const ProductPage = () => {
 
     const removeFromFavorites = async () => {
         setIsLoading(true)
-        await fetch('http://localhost:4000/api/listings/removefavorite', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/removefavorite`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const ProductPage = () => {
 
     const reportListing = async () => {
         setIsLoading(true)
-        await fetch('http://localhost:4000/api/listings/report', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/report`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ const ProductPage = () => {
         };
         const queryString = new URLSearchParams(updatedQuery).toString();
 
-        await fetch(`http://localhost:4000/api/listings/search?${queryString}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
             .then(res => res.json())
             .then(data => {
                 setListingsContextArr(prev => prev.concat(data));

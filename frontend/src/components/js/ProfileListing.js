@@ -11,7 +11,7 @@ const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMy
     const deleteHandler = async () => {
         setIsLoading(true)
         console.log("to delete: " + uid)
-        await fetch('http://localhost:4000/api/listings/deletelisting', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/deletelisting`, {
             method: "DELETE",
             body: JSON.stringify({ uid: uid }),
             headers: {

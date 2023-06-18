@@ -21,7 +21,7 @@ const RatingCard = ({ text, ratedUser, date, stars, name, autor, uid, rerender, 
 
     const deleteRating = async () => {
         setIsLoading(true);
-        await fetch('http://localhost:4000/api/users/deleterating', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/users/deleterating`, {
             method: 'DELETE',
             body: JSON.stringify({
                 uid: uid,

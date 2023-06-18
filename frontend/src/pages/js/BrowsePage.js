@@ -34,7 +34,7 @@ const BrowsePage = () => {
             kategoria: currentCat
         }
         const queryString = new URLSearchParams(qureyObj).toString();
-        await fetch(`http://localhost:4000/api/listings/categorysearch?${queryString}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/categorysearch?${queryString}`)
         .then(res => res.json())
         .then(data => setListingsContextArr(prev => prev.concat(data))).then(() => setIsFetching(false));
     }
@@ -62,7 +62,7 @@ const BrowsePage = () => {
         };
         const queryString = new URLSearchParams(updatedQuery).toString();
 
-        await fetch(`http://localhost:4000/api/listings/search?${queryString}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
             .then(res => res.json())
             .then(data => {
                 setListingsContextArr(prev => prev.concat(data));
@@ -179,7 +179,7 @@ const BrowsePage = () => {
 
             console.log(queryString)
 
-            await fetch(`http://localhost:4000/api/listings/categorysearch?${queryString}`)
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/categorysearch?${queryString}`)
                 .then(res => res.json())
                 .then(data => setListingsContextArr(data))
 

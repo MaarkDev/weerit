@@ -10,7 +10,7 @@ const FavoriteListing = ({ title, price, src, uid, isLoading, setIsLoading, getM
 
     const removeFromFavorites = async () => {
         setIsLoading(true)
-        await fetch('http://localhost:4000/api/listings/removefavorite', {
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/removefavorite`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

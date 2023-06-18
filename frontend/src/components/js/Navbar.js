@@ -140,7 +140,7 @@ export default function Navbar() {
         const queryString = new URLSearchParams(updatedQuery).toString();
 
 
-        await fetch(`http://localhost:4000/api/listings/search?${queryString}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
             .then(res => res.json())
             .then(data => { setListingsContextArr(data); console.log(data); setQPageNumber(1) })
             .then(() => navigate(`/browse/${queryString}`));
@@ -151,7 +151,7 @@ export default function Navbar() {
     }
 
     const getDbUser = async () => {
-        await fetch(`http://localhost:4000/api/users/getuser/${user.uid}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${user.uid}`)
         .then((data) => data.json())
         .then((user) => {setDbUser(user); console.log("DB USER:", user)})
     }

@@ -6,7 +6,7 @@ const ReportedListing = ({ src, title, price, uid, isLoading, setIsLoading, rere
 
     const deleteListing = async () => {
         setIsLoading(true);
-        fetch('http://localhost:4000/api/listings/deletereported', {
+        fetch(`${process.env.REACT_APP_API_URL}/api/listings/deletereported`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ const ReportedListing = ({ src, title, price, uid, isLoading, setIsLoading, rere
 
     const keepListing = async () => {
         setIsLoading(true);
-        fetch('http://localhost:4000/api/listings/reportedok', {
+        fetch(`${process.env.REACT_APP_API_URL}/api/listings/reportedok`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -123,7 +123,7 @@ const CreateListingPage = () => {
 
         try {
             console.log(selectedImages64)
-            await fetch('http://localhost:4000/api/listings/newlisting', {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/newlisting`, {
                 method: 'POST',
                 body: JSON.stringify({
                     autor: autor,

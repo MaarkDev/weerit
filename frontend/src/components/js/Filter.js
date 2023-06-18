@@ -227,7 +227,7 @@ const Filter = () => {
         };
         const queryString = new URLSearchParams(updatedQuery).toString();
 
-        await fetch(`http://localhost:4000/api/listings/search?${queryString}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
             .then(res => res.json())
             .then(data => { setListingsContextArr(data); console.log(data); setQPageNumber(1) })
             .then(navigate(`/browse/${queryString}`));
