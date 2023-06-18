@@ -8,7 +8,7 @@ router.get('/google', (req, res, next) => {
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect(`https://weerit.onrender.com`)
+    res.redirect(process.env.FRONTEND_URL)
 })
 
 router.get('/login/success', (req, res) => {
@@ -32,7 +32,7 @@ router.get('/login/failed', (req, res) => {
 })
 
 router.get('/google/callback', passport.authenticate('google', {
-    successRedirect: 'https://weerit.onrender.com',
+    successRedirect: process.env.FRONTEND_URL,
     failureRedirect: '/login/failed'
 }))
 

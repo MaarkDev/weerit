@@ -195,6 +195,11 @@ option{
     cursor: pointer;
 }
 
+.new-listing-image-info{
+    margin: 0;
+    margin-bottom: -24px;
+}
+
 @media screen and (max-width: 768px) {
     .listing-page-wrapper-inner{
         width: 90vw;
