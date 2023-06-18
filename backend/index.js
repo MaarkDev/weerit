@@ -16,7 +16,7 @@ const PORT = process.env.PORT;
 app.use(bodyParser.json({ limit: '100mb' }));
 
 app.use(cors({
-  origin: 'https://weerit.onrender.com',
+  origin: ['https://weerit.onrender.com', 'https://weerit-back.onrender.com'],
   methods: 'GET,POST,PUT,DELETE,PATCH',
   credentials: true
 }));
