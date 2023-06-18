@@ -9,7 +9,7 @@ passport.use(new GoogleStrategy({
 },
 
   function (accessToken, refreshToken, profile, cb) {
-    console.log("TRIED TO AUTH, IM IN BACKEND");
+    //console.log("TRIED TO AUTH, IM IN BACKEND");
     User.findOne({ uid: profile.id })
       .then(existingUser => {
         if (existingUser) {

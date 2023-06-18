@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}))
+router.get('/google', (req, res, next) => {
+    console.log('Google authentication route triggered');
+    next();
+  }, passport.authenticate('google', {scope: ['profile', 'email']}));
 
 router.get('/logout', (req, res) => {
     req.logout();
