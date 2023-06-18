@@ -43,27 +43,32 @@ function App() {
   const [qPageNumber, setQPageNumber] = useState(1)
 
   useEffect(() => {
-    const getUser = () => {
-      fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+    const getUser = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.status === 200) {
+          const resObj = await response.json();
+          console.log('resobj:', resObj);
+          setUser(resObj.user);
+        } else {
+          throw new Error('Authentication has failed');
         }
-      }).then(res => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        throw new Error('auth has failed')
-      }).then(resObj => {
-        console.log('resobj: ', resObj);
-        setUser(resObj.user)
-      }).catch(err => console.log(err));
-    }
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     getUser();
   }, []);
+
 
   //useEffect(() => {
    // console.log("FILTER:", filter)
