@@ -1,0 +1,44 @@
+.rating-card-wrapper{
+    width: 100%;
+    min-height: 64px;
+    background-color: rgb(232, 232, 232);
+    border-radius: 4px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.rating-card-inline{
+    display: flex;
+    font-weight: bold;
+}
+
+.rating-card-stars{
+    margin-left: 12px;
+}
+
+.rating-card-desc > p{
+    margin: 0;
+    margin-top: 4px;
+}
+
+.rating-card-date > p{
+    margin: 0;
+    margin-top: 8px;
+    font-size: 14px;
+    color: gray;
+}
+
+.inline-rating{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.rating-card-delete{
+    background-color: black;
+    color: white !important;
+    font-weight: bold;
+    padding: 4px;
+    cursor: pointer;
+}

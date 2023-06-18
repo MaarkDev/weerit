@@ -1,0 +1,28 @@
+.filter-active-el{
+    display: flex;
+    height: 32px;
+    width: fit-content;
+    align-items: center;
+    background-color: rgb(232, 232, 232);
+    padding: 4px 8px;
+    border-radius: 4px;
+    justify-content: space-between;
+    font-weight: normal;
+    margin: 2px;
+}
+
+.filter-active-el:hover{
+    background-color: rgb(222, 222, 222);
+    cursor: pointer;
+}
+
+.filter-active-text{
+    margin-right: 14px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.filter-active-x{
+    font-size: 10px;
+    padding-right: 2px;
+}

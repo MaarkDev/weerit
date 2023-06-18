@@ -1,0 +1,43 @@
+import '../css/adminpage.css'
+import NoListing from '../../components/js/NoListing';
+import ReportedListing from '../../components/js/ReportedListing';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import LoadingPage from './LoadingPage';
+
+const AdminPage = () => {
+    const [reportedArr, setReportedArr] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [rerender, setRerender] = useState(false);
+
+    const getReported = async () => {
+        fetch('http://localhost:4000/api/listings/getreported')
+        .then((res) => res.json()).then((data) => {setReportedArr(data); setIsLoading(false)});
+    }
+
+    useEffect(() => {
+        setIsLoading(true)
+        getReported();
+    }, [rerender])
+    
+    return(
+        <div className='profile-page-outer-wrapper'>
+            <div className='profile-page-wrapper-inner'>
+                <h1 className='admin-page-title'>Admin Dashboard</h1>
+                
+                    {reportedArr.length !== 0 ?
+                        <div className='profile-page-listing-container'>
+                            {reportedArr.map((item) => <ReportedListing rerender={rerender} setRerender={setRerender} isLoading={isLoading} setIsLoading={setIsLoading} title={item.nazov} price={item.cena} src={item.fotky[0]} uid={item.uid} />)}
+                        </div>
+                    : 
+                        <NoListing value="Žiadne nahlásené inzeráty" />  
+                }
+                </div>
+                
+            
+            {isLoading ? <LoadingPage/> : null}
+        </div>
+    )
+}
+
+export default AdminPage;

@@ -1,0 +1,28 @@
+.filter-button-wrapper{
+    width: 128px;
+    height: 40px;
+    background-color: gold;
+    color: black;
+    border-radius: 4px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 200ms;
+    margin-left: 2px;
+    margin-top: 0px;
+    align-self: center;
+}
+
+.filter-button-wrapper:hover{
+    cursor: pointer;
+    transition: 200ms;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+@media screen and (max-width: 768px) {
+    .filter-button-wrapper{
+        margin-left: 2px;
+
+    }
+}

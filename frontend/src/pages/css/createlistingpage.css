@@ -1,0 +1,218 @@
+.listing-page-wrapper-outer{
+    width: 100%;
+    max-width: 1264px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 32px auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    height: fit-content;
+}
+
+.listing-page-wrapper-inner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-listing-page-title{
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.new-listing-photo-upload{
+    padding: 32px 0;
+    display: flex;
+    width: 100%;
+}
+
+.new-listing-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.new-listing-image-label{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted black;
+    border-radius: 8px;
+    width: 100%;
+    height: 160px;
+    cursor: pointer;
+    font-size: large;
+}
+
+.new-listing-image-label > span {
+    font-weight: lighter;
+    font-size: small;
+    padding-top: 0.5rem;
+}
+
+.new-listing-image-input{
+    display: none;
+}
+
+.new-listing-form-inputs{
+    width: 100%;
+    display: flex;
+    height: fit-content;
+}
+
+.new-listing-form-inputs-left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.new-listing-form-inputs-right{
+    width: 50%;
+    
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.new-listing-input-label{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 24px;
+}
+
+.new-listing-input-field{
+    padding: 0;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid gray;;
+    outline: 0;
+    font-size: 16px;
+    padding: 4px;
+    border-radius:4px;
+}
+
+.new-listing-input-field-textarea{
+    width: 100%;
+    height: 120px;
+    border-radius: 4px;
+    resize: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding: 8px 4px;
+    margin-top: 4px;
+    outline: 0;
+    border: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-bottom: 1px solid gray;
+}
+
+.new-listing-input-select{
+    width: 100%;
+    height: 32px;
+    padding: 4px 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 4px;
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+    border-bottom: 1px solid gray;;
+}
+
+option{
+    height: 24px;
+    font-size: 16px;
+    height: 8px;
+}
+
+.divider{
+    width: 120px;
+}
+
+.new-listing-submit{
+    width: 100%;
+    height: 52px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: gold;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.new-listing-submit:hover{
+    cursor: pointer;
+    transition: 200ms;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+
+.red{
+    color: red;
+}
+
+.new-listing-selected-images-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    max-width: 1200px;
+    justify-content:flex-start;
+    margin-top: 36px;
+    gap: 8px;
+}
+
+.new-listing-selected-image{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.new-listing-selected-image > img{
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.new-listing-selected-image > button{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .listing-page-wrapper-inner{
+        width: 90vw;
+    }
+    .new-listing-page-title{
+        width: 90vw;
+        display: block;
+    }
+    .new-listing-form-inputs{
+        flex-direction: column;
+        width: 90vw;
+    }
+    .new-listing-form-inputs-left, .new-listing-form-inputs-right{
+        width: 100%;
+    }
+
+
+    .new-listing-selected-images-container{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

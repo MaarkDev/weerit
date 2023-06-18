@@ -1,0 +1,15 @@
+"filename", "language", "JavaScript", "JSON", "Properties", "comment", "blank", "total"
+"c:\Users\komar\Desktop\weerit\backend\.env", "Properties", 0, 0, 8, 0, 0, 8
+"c:\Users\komar\Desktop\weerit\backend\cloudinary.js", "JavaScript", 8, 0, 0, 1, 2, 11
+"c:\Users\komar\Desktop\weerit\backend\controllers\listingsControlles.js", "JavaScript", 67, 0, 0, 0, 12, 79
+"c:\Users\komar\Desktop\weerit\backend\controllers\usersController.js", "JavaScript", 17, 0, 0, 0, 4, 21
+"c:\Users\komar\Desktop\weerit\backend\index.js", "JavaScript", 40, 0, 0, 1, 6, 47
+"c:\Users\komar\Desktop\weerit\backend\models\listingModel.js", "JavaScript", 61, 0, 0, 0, 4, 65
+"c:\Users\komar\Desktop\weerit\backend\models\userModel.js", "JavaScript", 17, 0, 0, 0, 4, 21
+"c:\Users\komar\Desktop\weerit\backend\package-lock.json", "JSON", 0, 4322, 0, 0, 1, 4323
+"c:\Users\komar\Desktop\weerit\backend\package.json", "JSON", 0, 27, 0, 0, 1, 28
+"c:\Users\komar\Desktop\weerit\backend\passport.js", "JavaScript", 36, 0, 0, 0, 5, 41
+"c:\Users\komar\Desktop\weerit\backend\routes\auth.js", "JavaScript", 34, 0, 0, 0, 7, 41
+"c:\Users\komar\Desktop\weerit\backend\routes\listingRoutes.js", "JavaScript", 8, 0, 0, 0, 3, 11
+"c:\Users\komar\Desktop\weerit\backend\routes\userRoutes.js", "JavaScript", 5, 0, 0, 0, 4, 9
+"Total", "-", 293, 4349, 8, 2, 53, 4705

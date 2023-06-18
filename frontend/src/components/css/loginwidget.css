@@ -1,0 +1,72 @@
+.login-widget-wrapper {
+    width: fit-content;
+    padding: 16px;
+    height: fit-content;
+    position: fixed;
+    display: flex;
+    background-color: #ffffff;
+    z-index: 10000;
+    top: 64px;
+    right: -280px;
+    border-radius: 4px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-widget-text-container {
+    width: 240px;
+    text-align: center;
+}
+
+.login-widget-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.login-widget-desc {
+    font-size: 16px;
+    margin-top: 4px;
+    color: #555555;
+}
+
+.login-widget-title>p,
+.login-widget-desc>p {
+    margin: 0;
+    padding: 0;
+}
+
+.login-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+@keyframes showWidget{
+    from{
+        right: -280px;
+    }to{
+        right: 12px;
+    }
+}
+
+@keyframes hideWidget{
+    from{
+        right: 12px;
+    }to{
+        right: -280px;
+    }
+}
+
+.login-widget-wrapper.shown{
+    right: 12px;
+    animation: showWidget 200ms;
+}
+
+.login-widget-wrapper.hidden{
+    right: -280px;
+    animation: hideWidget 200ms;
+}

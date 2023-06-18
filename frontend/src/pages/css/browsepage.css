@@ -1,0 +1,22 @@
+.browser-page{
+    display: flex;
+    width: 90vw;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+.browse-page-res-text{
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    margin-top: 24px;
+    margin-bottom: 0px;
+    max-width: 1200px;
+}
+
+.browse-page-no-search{
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-top: -4px !important;
+}

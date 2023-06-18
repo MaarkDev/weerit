@@ -1,0 +1,35 @@
+.filter-container {
+  width: 100%;
+  height: fit-content;
+  max-width: 1200px;
+  margin-top: 36px;
+  display: grid;
+  align-items: center;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 0;
+  margin-left: -2px;
+  margin-right: -2px;
+
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 4px;
+}
+
+.active-filters-container{
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .active-filters-container{
+    width: 90vw;
+    align-self: center;
+    margin-top: 16px
+  }
+}

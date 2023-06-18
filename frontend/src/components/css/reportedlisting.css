@@ -1,0 +1,59 @@
+.profile-listing-wrapper{
+    border-radius: 4px;
+    margin-top: 32px;
+}
+
+.profile-listing-container{
+    background-color: rgb(240, 240, 240);
+    transform: scale(1.0);
+    transition: 200ms;
+}
+
+.profile-listing-container:hover{
+    transform: scale(1.02);
+    transition: 200ms;
+    z-index: 1;
+    background-color: rgb(232, 232, 232);
+    cursor: pointer;
+}
+
+.profile-listing-photo > img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profile-listing-text > p{
+    margin: 2px 0;
+    margin-left: 4px;
+}
+
+.profile-listing-delete-button{
+    width: 100%;
+    height: 36px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+
+}
+
+.profile-listing-delete-button:hover{
+    cursor: pointer;
+    background-color: red;
+}
+
+.profile-listing-delete-button-text{
+    color: white;
+    font-weight: bold;
+    margin: 0;
+}
+
+.profile-listing-text-right{
+    margin-left: 4px;
+}
+
+.user-visit-listing{
+    padding-bottom: 4px;
+}
