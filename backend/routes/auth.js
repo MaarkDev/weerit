@@ -2,7 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 
 router.get('/google/callback', passport.authenticate('google', {
-    successRedirect: "https://weerit.onrender.com",
+    successRedirect: `${process.env.FRONTEND_URL}`,
     failureRedirect: '/login/failed'
 }))
 
