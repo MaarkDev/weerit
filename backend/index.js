@@ -14,8 +14,6 @@ const app = express();
 const PORT = process.env.PORT;
 
 // Middleware
-app.use(bodyParser.json({ limit: '100mb' }));
-
 app.use(cors({
   origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
   methods: 'GET,POST,PUT,DELETE,PATCH',
@@ -24,6 +22,7 @@ app.use(cors({
   optionsSuccessStatus: 204
 }));
 
+app.use(bodyParser.json({ limit: '100mb' }));
 
 app.use(cookieSession({
   name: 'session',
