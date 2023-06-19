@@ -17,10 +17,13 @@ const PORT = process.env.PORT;
 app.use(bodyParser.json({ limit: '100mb' }));
 
 app.use(cors({
-  origin: '*',
+  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
   methods: 'GET,POST,PUT,DELETE,PATCH',
   credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
+
 
 app.use(cookieSession({
   name: 'session',
