@@ -37,9 +37,11 @@ function(accessToken, refreshToken, profile, cb) {
 
 
 passport.serializeUser((user, done) => {
+  console.log("serializeUser:" + user)
   done(null, user); // tu davaj do user objectu napr { username: profile.displayName........ }
 })
 
 passport.deserializeUser((user, done) => {
+  console.log("deserializeUser:" + user)
   done(null, user);
 })
