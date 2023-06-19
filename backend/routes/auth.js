@@ -1,10 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-router.get('/google', (req, res, next) => {
-    console.log('Google authentication route triggered');
-    next();
-  }, passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
 router.get('/logout', (req, res) => {
     req.logout();
@@ -32,10 +29,9 @@ router.get('/login/failed', (req, res) => {
 })
 
 router.get('/google/callback', passport.authenticate('google', {
+    successRedirect: "https://weerit.onrender.com",
     failureRedirect: '/login/failed'
-}), function(req,res){
-    res.redirect(process.env.FRONTEND_URL)
-})
+}))
 
 
 module.exports = router;
