@@ -29,7 +29,6 @@ app.use(cookieSession(
   }
 ))
 
-app.use(session({ secret: 'weerit' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
