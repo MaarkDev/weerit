@@ -16,8 +16,8 @@ router.get('/logout', (req, res) => {
 router.get('/login/success', (req, res) => {
     console.log("REQ.USER")
     console.log(req.user)
-    res.header('Access-Control-Allow-Origin', `${process.env.FRONTEND_URL}`);
-    res.header('Access-Control-Allow-Credentials', 'true');
+    //res.header('Access-Control-Allow-Origin', `${process.env.FRONTEND_URL}`);
+    //res.header('Access-Control-Allow-Credentials', 'true');
     if(req.user){
         res.status(200).json({
             success: true,
