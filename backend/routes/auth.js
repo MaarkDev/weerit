@@ -9,12 +9,17 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/login/success', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'success',
-        user: req.user,
-        cookies: req.cookies
-    });
+    console.log(req)
+    if(req.user){
+        res.status(200).json({
+            success: true,
+            message: 'success',
+            user: req.user,
+            cookies: req.cookies
+        });
+    }else{
+        res.status(403).json({error: true, message: 'Not Authorized'})
+    }
 })
 
 router.get('/login/failed', (req, res) => {
