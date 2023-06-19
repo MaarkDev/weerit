@@ -45,13 +45,12 @@ function App() {
   useEffect(() => {
     const getUser = () => {
       fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
-        method: "GET",
+        method: 'GET',
+        credentials: 'include',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Cache': 'no-cache'
-        },
-        credentials: 'same-origin'
+        }
       }).then(res => {
         if (res.status === 200) {
           return res.json();
