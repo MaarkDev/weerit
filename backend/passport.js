@@ -23,7 +23,9 @@ function(accessToken, refreshToken, profile, cb) {
       }
     })
     .then(savedUser => {
-      return cb(null, savedUser);
+      if (savedUser) {
+        return cb(null, savedUser);
+      }
     })
     .catch(err => {
       return cb(err);
