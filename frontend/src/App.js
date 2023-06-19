@@ -47,7 +47,6 @@ function App() {
       fetch('https://weerit-back.onrender.com/auth/login/success', {
         method: 'GET',
         credentials: 'include',
-        withCredentials: true,
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
