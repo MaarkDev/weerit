@@ -43,8 +43,8 @@ function App() {
   const [qPageNumber, setQPageNumber] = useState(1)
 
   useEffect(() => {
-    const getUser = () => {
-      fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
+    const getUser = async () => {
+      await fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -53,8 +53,6 @@ function App() {
           "Access-Control-Allow-Credentials": true
         }
       }).then(res => {
-        console.log("RES JSON")
-        console.log(res.json())
         if (res.status === 200) {
           return res.json();
         }
