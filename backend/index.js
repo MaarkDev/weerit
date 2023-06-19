@@ -24,7 +24,11 @@ app.use(cookieSession(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors());
+app.use(cors({
+  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true 
+}));
 
 app.use(bodyParser.json({ limit: '100mb' }));
 
