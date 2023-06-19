@@ -25,10 +25,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
+  origin: 'https://weerit.onrender.com',
   methods: 'GET,POST,PUT,DELETE,PATCH',
   credentials: true 
 }));
+
 
 app.use(bodyParser.json({ limit: '100mb' }));
 
