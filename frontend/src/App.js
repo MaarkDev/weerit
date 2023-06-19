@@ -53,6 +53,8 @@ function App() {
           "Access-Control-Allow-Credentials": true
         }
       }).then(res => {
+        console.log("RES JSON")
+        console.log(res.json())
         if (res.status === 200) {
           return res.json();
         }
