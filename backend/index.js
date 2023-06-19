@@ -16,6 +16,12 @@ const PORT = process.env.PORT;
 // Middleware
 app.use(bodyParser.json({ limit: '100mb' }));
 
+app.use(cors({
+  origin: 'https://weerit.onrender.com',
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true 
+}));
+
 app.use(cookieSession({
   name: 'session',
   keys: ['weerit'],
@@ -25,11 +31,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({
-  origin: 'https://weerit.onrender.com',
-  methods: 'GET,POST,PUT,DELETE,PATCH',
-  credentials: true 
-}));
+
 
 // Routes
 app.use('/auth', authRoute);
