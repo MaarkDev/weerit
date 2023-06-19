@@ -52,15 +52,7 @@ function App() {
           'Content-Type': 'application/json',
           "Access-Control-Allow-Credentials": true
         }
-      }).then(res => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        throw new Error('auth has failed')
-      }).then(resObj => {
-        console.log('resobj: ', resObj);
-        setUser(resObj.user)
-      }).catch(err => console.log(err));
+      }).then(res => {console.log("RESJSON");console.log(res.json())});
     }
 
     getUser();
