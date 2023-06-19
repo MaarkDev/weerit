@@ -13,7 +13,7 @@ router.get('/logout', (req, res) => {
     res.redirect(process.env.FRONTEND_URL)
 })
 
-router.get('/login/success', (req, res) => {
+router.get('/login/success', passport.authenticate('google'), (req, res) => {
     console.log("REQ.USER")
     console.log(req.user)
     if(req.user){
