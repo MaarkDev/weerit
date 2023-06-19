@@ -32,7 +32,7 @@ router.get('/login/failed', (req, res) => {
 })
 
 router.get('/google/callback', passport.authenticate('google', {
-    successRedirect: 'https://weerit.onrender.com/',
+    successRedirect: 'https://weerit.onrender.com',
     failureRedirect: '/login/failed'
 }))
 
