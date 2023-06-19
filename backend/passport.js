@@ -8,27 +8,13 @@ passport.use(new GoogleStrategy({
   callbackURL: "https://weerit-back.onrender.com/auth/google/callback" 
 },
 
-  function (accessToken, refreshToken, profile, cb) {
-    //console.log("TRIED TO AUTH, IM IN BACKEND");
-    User.findOne({ uid: profile.id })
-      .then(existingUser => {
-        if (existingUser) {
-          return cb(null, existingUser);
-        } else {
-          const newUser = new User({
-            uid: profile.id,
-            mail: profile.emails[0].value,
-            name: profile.displayName
-          });
-          return newUser.save().then(savedUser => {
-            return cb(null, savedUser);
-          });
-        }
-      })
-      .catch(err => {
-        return cb(err);
-      });
-  }
+function(accessToken, refreshToken, profile, cb) {
+  User.findOrCreate({ uid: profile.id,
+    mail: profile.emails[0].value,
+    name: profile.displayName }, function (err, user) {
+    return cb(err, user);
+  });
+}
 
 ));
 
