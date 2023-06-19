@@ -37,13 +37,13 @@ function(accessToken, refreshToken, profile, cb) {
 
   
 passport.serializeUser((user, done) => {
-  //console.log("serializeUser:");
-  //console.log(user); 
+  console.log("serializeUser:");
+  console.log(user); 
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  //console.log("deserializeUser:");
-  //console.log(user); 
+  console.log("deserializeUser:");
+  console.log(user); 
   done(null, user);
 });
