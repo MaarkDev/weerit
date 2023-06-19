@@ -15,12 +15,6 @@ const PORT = process.env.PORT;
 
 app.use(bodyParser.json({ limit: '100mb' }));
 
-app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
-  methods: 'GET,POST,PUT,DELETE,PATCH',
-  credentials: true
-}));
-
 app.use(cookieSession(
   {
     name: "session",
@@ -31,6 +25,12 @@ app.use(cookieSession(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(cors({
+  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true
+}));
 
 app.use('/auth', authRoute);
 app.use('/api/users', userRoutes);
