@@ -2,50 +2,36 @@ require('dotenv').config();
 const cookieSession = require('cookie-session');
 const cors = require('cors');
 const express = require('express');
-const passport = require('passport');
-const passportSetup = require('./passport');
-const authRoute = require('./routes/auth');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const listingRoutes = require('./routes/listingRoutes');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT;
-
-// Middleware
-app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
-  methods: 'GET,POST,PUT,DELETE,PATCH',
-  credentials: true,
-}));
-
-app.use((req, res, next) => {
-  res.on('header', () => {
-    res.setHeader('Set-Cookie', res.getHeader('Set-Cookie').map(cookie => {
-      // Append "; SameSite=None; Secure" to each cookie string
-      return cookie + '; SameSite=None; Secure';
-    }));
-  });
-  next();
-});
-
-app.use(bodyParser.json({ limit: '100mb' }));
+const passport = require('passport')
+const passportCfg = require('./passport')
 
 app.use(cookieSession({
   name: 'session',
   keys: ['weerit'],
-  maxAge: 24 * 60 * 60 * 1000,
-}));
-
+  maxAge: 24*60*60*1000
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(cors({
+  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true
+}));
 
+app.use(bodyParser.json({ limit: '100mb' }));
 
 // Routes
-app.use('/auth', authRoute);
+app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
 

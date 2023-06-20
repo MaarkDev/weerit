@@ -1,16 +1,15 @@
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
-const passport = require('passport')
+const passport = require('passport');
 const User = require('./models/userModel')
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: `${process.env.BACKEND_URL}/auth/google/callback` 
-},
-
-function(accessToken, refreshToken, profile, cb) {
-  //console.log(profile)
-  User.findOne({ uid: profile.id })
+    clientID:     process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
+    passReqToCallback   : true
+  },
+  function(request, accessToken, refreshToken, profile, cb) {
+    User.findOne({ uid: profile.id })
     .then(existingUser => {
       if (existingUser) {
         return cb(null, existingUser);
@@ -28,22 +27,13 @@ function(accessToken, refreshToken, profile, cb) {
         return cb(null, savedUser);
       }
     })
-    .catch(err => {
-      return cb(err);
-    });
-}
+  }
 ));
 
-
-  
 passport.serializeUser((user, done) => {
-  console.log("serializeUser:");
-  console.log(user); 
-  done(null, user);
-});
+    done(null, user);
+})
 
 passport.deserializeUser((user, done) => {
-  console.log("deserializeUser:");
-  console.log(user); 
-  done(null, user);
-});
+    done(null, user);
+})
