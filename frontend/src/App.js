@@ -44,8 +44,8 @@ function App() {
 
   useEffect(() => {
     const getUser = async () => {
-       console.log("HERE")
-       await fetch(`https://weerit-back.onrender.com/auth/login/success`, {
+      console.log("HERE")
+       await fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
         method: 'GET',
         credentials: 'include',
         headers: {

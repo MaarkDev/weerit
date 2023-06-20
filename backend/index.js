@@ -13,6 +13,12 @@ const PORT = process.env.PORT;
 const passport = require('passport')
 const passportCfg = require('./passport')
 
+app.use(cors({
+  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true
+}));
+
 app.use(cookieSession({
   name: 'session',
   keys: ['weerit'],
@@ -21,11 +27,10 @@ app.use(cookieSession({
 
 
 
-app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
-  methods: 'GET,POST,PUT,DELETE,PATCH',
-  credentials: true
-}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(bodyParser.json({ limit: '100mb' }));
 
@@ -34,8 +39,7 @@ app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
