@@ -10,7 +10,7 @@ router.get('/google/callback', passport.authenticate('google', {
 
 router.get('/login/success', (req, res) => {
     console.log("COOKIE")
-    console.log(req.cookies.weerit)
+    console.log(req.cookies)
     if(req.user){
         res.status(200).json({
             success: true,
