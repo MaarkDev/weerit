@@ -18,6 +18,8 @@ router.get('/login/success', (req, res) => {
     console.log(req.user)
     //res.header('Access-Control-Allow-Origin', `${process.env.FRONTEND_URL}`);
     //res.header('Access-Control-Allow-Credentials', 'true');
+    req.session.cookie.sameSite = 'None';
+    req.session.cookie.secure = true;
     if(req.user){
         res.status(200).json({
             success: true,
