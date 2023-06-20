@@ -27,8 +27,13 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use(cookieSession({
   name: 'session',
   keys: ['weerit'],
-  maxAge: 24 * 60 * 60 * 1000
+  maxAge: 24 * 60 * 60 * 1000,
+  cookie: {
+    secure: true,
+    sameSite: 'none'
+  }
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());

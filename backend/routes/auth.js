@@ -4,19 +4,7 @@ const passport = require('passport');
 router.get('/google/callback', passport.authenticate('google', {
     successRedirect: `${process.env.FRONTEND_URL}`,
     failureRedirect: '/login/failed'
-}), (req, res) => {
-    const cookieOptions = {
-        sameSite: 'None',
-        secure: true,
-    };
-
-    Object.entries(req.cookies).forEach(([name, value]) => {
-        const cookieString = `${name}=${value}; SameSite=None; Secure`;
-        res.append('Set-Cookie', cookieString);
-    });
-
-});
-  
+}))
 
 router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
