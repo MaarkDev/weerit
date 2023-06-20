@@ -19,10 +19,19 @@ app.use(cors({
   credentials: true
 }));
 
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
+
 app.use(cookieSession({
   name: 'session',
   keys: ['weerit'],
-  maxAge: 24*60*60*1000
+  maxAge: 24*60*60*1000,
+  cookie: {
+    sameSite: 'none',
+    secure: true
+  }
 }))
 
 
