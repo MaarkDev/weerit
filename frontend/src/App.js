@@ -43,8 +43,9 @@ function App() {
   const [qPageNumber, setQPageNumber] = useState(1)
 
   useEffect(() => {
-    const getUser = () => {
-      fetch(`https://weerit-back.onrender.com/auth/login/success`, {
+    const getUser = async () => {
+       console.log("HERE")
+       await fetch(`https://weerit-back.onrender.com/auth/login/success`, {
         method: 'GET',
         credentials: 'include',
         headers: {
