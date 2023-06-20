@@ -4,7 +4,19 @@ const passport = require('passport');
 router.get('/google/callback', passport.authenticate('google', {
     successRedirect: `${process.env.FRONTEND_URL}`,
     failureRedirect: '/login/failed'
-}))
+}), (req, res) => {
+    const cookieOptions = {
+        sameSite: 'None',
+        secure: true,
+    };
+
+    Object.entries(req.cookies).forEach(([name, value]) => {
+        const cookieString = `${name}=${value}; SameSite=None; Secure`;
+        res.append('Set-Cookie', cookieString);
+    });
+
+});
+  
 
 router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
@@ -18,8 +30,6 @@ router.get('/login/success', (req, res) => {
     console.log(req.user)
     //res.header('Access-Control-Allow-Origin', `${process.env.FRONTEND_URL}`);
     //res.header('Access-Control-Allow-Credentials', 'true');
-    req.session.cookie.sameSite = 'None';
-    req.session.cookie.secure = true;
     if(req.user){
         res.status(200).json({
             success: true,
