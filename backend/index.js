@@ -20,13 +20,17 @@ app.use(cors({
 }));
 
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['weerit'],
-  maxAge: 24*60*60*1000,
-  sameSite: 'none',
-  secure: true
-}));
+app.set('trust proxy', 1)
+app.use(
+    cookieSession({
+      name: "__session",
+      keys: ["weerit"],
+        maxAge: 24 * 60 * 60 * 100,
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none'
+    })
+);;
 
 app.use(passport.initialize());
 app.use(passport.session());
