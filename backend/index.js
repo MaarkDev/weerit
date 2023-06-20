@@ -19,8 +19,7 @@ app.use(cookieSession({
   maxAge: 24*60*60*1000
 }))
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use(cors({
   origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL],
@@ -34,6 +33,9 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
