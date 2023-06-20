@@ -9,8 +9,7 @@ router.get('/google/callback', passport.authenticate('google', {
 }))
 
 router.get('/login/success', (req, res) => {
-    console.log("COOKIE")
-    console.log(req.cookies)
+    //res.setHeader('X-Content-Type-Options', 'nosniff');
     if(req.user){
         res.status(200).json({
             success: true,
