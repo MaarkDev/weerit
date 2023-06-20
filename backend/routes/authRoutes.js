@@ -9,13 +9,18 @@ router.get('/google/callback', passport.authenticate('google', {
 }))
 
 router.get('/login/success', (req, res) => {
+    console.log("COOKIE")
+    console.log(req.cookies.weerit)
+    if(req.user){
         res.status(200).json({
             success: true,
             message: "success",
             user: req.user,
             cookies: req.cookies
         })
-    
+    }else{
+        res.status(403).json({ message: "Auth has Failed" })
+    }
 })
 
 router.get('/login/failed', (req, res) => {
