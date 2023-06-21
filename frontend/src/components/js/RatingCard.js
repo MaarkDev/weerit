@@ -31,7 +31,7 @@ const RatingCard = ({ text, ratedUser, date, stars, name, autor, uid, rerender, 
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((res) => res.json()).then((data) => {console.log(data); setIsLoading(false); setRerender(!rerender)})
+        }).then((res) => res.json()).then((data) => {setIsLoading(false); setRerender(!rerender)})
     }
 
     const formatDate = () => {

@@ -34,7 +34,7 @@ const ProfilePage = () => {
           const listingsResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/listings/mylistings?uid=${user_id}`);
           const listingsJson = await listingsResponse.json();
           if (listingsResponse.ok) {
-            console.log(listingsJson);
+            //console.log(listingsJson);
             setListings(listingsJson);
             setIsLoading(false);
           }

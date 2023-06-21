@@ -59,7 +59,7 @@ const UserPage = () => {
             fetch(`${process.env.REACT_APP_API_URL}/api/listings/mylistings?uid=${id}`).then(data => data.json()).then((data) => setVisitedUserListings(data))
         ])
 
-        console.log(visitedUser.ratings)
+        //console.log(visitedUser.ratings)
         
     }, [rerender])
 

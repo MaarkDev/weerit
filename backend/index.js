@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const history = require('express-history-api-fallback');
 const listingRoutes = require('./routes/listingRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -25,10 +26,10 @@ app.use(
     cookieSession({
       name: "__session",
       keys: ["weerit"],
-        maxAge: 24 * 60 * 60 * 100,
-        secure: true,
-        httpOnly: true,
-        sameSite: 'none'
+      maxAge: 24 * 60 * 60 * 100,
+      //secure: true, // COMMENT IN DEV
+      httpOnly: true,
+      //sameSite: 'none' // COMMENT IN DEV
     })
 );;
 

@@ -13,7 +13,7 @@ export const PriceFilterEl = () => {
             cenaod: '',
             cenado: ''
         }));
-        console.log(filter)
+        //console.log(filter)
     }
 
     return(
@@ -39,7 +39,7 @@ export const PscFilterEl = () => {
             coords: [0, 0],
             mesto: ''
         }));
-        console.log(filter)
+        //console.log(filter)
     }
 
     return(
@@ -62,7 +62,7 @@ export const RadiusFilterEl = () => {
             ...prevFilter,
             vokoli: '10'
         }));
-        console.log(filter)
+        //console.log(filter)
     }
 
     return(
@@ -85,7 +85,7 @@ export const SizeFilterEl = () => {
             ...prevFilter,
             velkostIna: ''
         }));
-        console.log(filter)
+        //console.log(filter)
     }
 
     return(
@@ -108,7 +108,7 @@ export const BrandFilterEl = () => {
             ...prevFilter,
             znackaIna: ''
         }));
-        console.log(filter)
+        //console.log(filter)
     }
 
     return(

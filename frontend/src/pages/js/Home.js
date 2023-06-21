@@ -14,6 +14,7 @@ import ListingsContext from "../../context/ListingsContext";
 import QueryContext from "../../context/QueryContext";
 import LoadingPage from "./LoadingPage";
 import AuthContext from "../../context/AuthContext";
+import MoreButton from "../../components/js/MoreButton";
 
 const HomePage = () => {
     const [isHovered, setIsHovered] = useState(false);
@@ -41,35 +42,15 @@ const HomePage = () => {
         .then(data => setListingsContextArr(prev => prev.concat(data))).then(() => setIsFetching(false))
     }
 
-    let previousScrollPosition = 0;
-    const pageBottomHandler = async () => {
-        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-        const currentScroll = scrollTop + clientHeight;
-
-        const isScrollingDown = currentScroll > previousScrollPosition;
-        previousScrollPosition = currentScroll;
-
-        if (isScrollingDown && currentScroll >= scrollHeight - 20) {
-            setIsFetching(true);
-        }
-    };
-
-
 
     useEffect(() => {
         if(isFetching){
             fetchAll();
-            console.log('2')
+            //console.log('2')
         }
-        console.log(isFetching)
+        //console.log(isFetching)
     }, [isFetching])
 
-    useEffect(() => {
-        window.addEventListener('scroll', pageBottomHandler);
-        return () => {
-            window.removeEventListener('scroll', pageBottomHandler);
-        };
-    }, [])
 
     useEffect(() => {
         setListingsContextArr([]);
@@ -94,7 +75,7 @@ const HomePage = () => {
         setQuery({...query, searchvalue: ''})
 
         fetchAll();
-        console.log('1')
+        //console.log('1')
 
         const interval = setInterval(() => {
             setCurrentIndex(prevIndex => {
@@ -150,6 +131,7 @@ const HomePage = () => {
 
             <Filter />
             <Catalog />
+            <MoreButton setIsFetching={setIsFetching}/>
             {isFetching ? <LoadingPage /> : null}
         </div>
     )

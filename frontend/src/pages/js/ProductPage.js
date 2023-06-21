@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import QueryContext from '../../context/QueryContext';
 import PageNumberContext from '../../context/PageNumberContext';
 import ListingsContext from '../../context/ListingsContext';
+import MoreButton from '../../components/js/MoreButton';
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -45,7 +46,7 @@ const ProductPage = () => {
             })
             .then((userJSON) => {
                 setUserFavorites(userJSON.favorites);
-                console.log(userJSON);
+                //console.log(userJSON);
             });
     };
 
@@ -145,28 +146,15 @@ const ProductPage = () => {
             .then(data => {
                 setListingsContextArr(prev => prev.concat(data));
                 setIsFetching(false);
-                console.log(data)
+                //console.log(data)
             })
             //.then(() => navigate(`/browse/${queryString}`));
     }
 
-    let previousScrollPosition = 0;
-    const pageBottomHandler = async () => {
-        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-        const currentScroll = scrollTop + clientHeight;
-
-        const isScrollingDown = currentScroll > previousScrollPosition;
-        previousScrollPosition = currentScroll;
-
-        if (isScrollingDown && currentScroll >= scrollHeight - 20) {
-            setIsFetching(true);
-        }
-    };
-
     useEffect(() => {
         if(isFetching){
             queryHandler();
-            console.log('searchq')
+            //console.log('searchq')
         }
     }, [isFetching])
 
@@ -174,11 +162,8 @@ const ProductPage = () => {
         setQPageNumber(0);
         setListingsContextArr([]); 
         queryHandler();
-        window.addEventListener('scroll', pageBottomHandler);
-        return () => {
-            window.removeEventListener('scroll', pageBottomHandler);
-        };
     }, [])
+
 
     return (
         <>
@@ -243,7 +228,7 @@ const ProductPage = () => {
             <Filter />
             <Catalog />
         </div>
-        
+        <MoreButton setIsFetching={setIsFetching} />
         {isLoading ? <LoadingPage /> : <></>}
         {isFetching ? <LoadingPage /> : <></>}
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Catalog from './components/js/Catalog';
 import BrowsePage from './pages/js/BrowsePage';
@@ -40,11 +40,12 @@ function App() {
 
   const [listingsContextArr, setListingsContextArr] = useState([]);
   const [query, setQuery] = useState({});
-  const [qPageNumber, setQPageNumber] = useState(1)
+  const [qPageNumber, setQPageNumber] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = async () => {
-      console.log("HERE")
+      //console.log("HERE")
        await fetch(`${process.env.REACT_APP_API_URL}/auth/login/success`, {
         method: 'GET',
         credentials: 'include',
@@ -58,7 +59,7 @@ function App() {
         }
         throw new Error('auth has failed')
       }).then(resObj => {
-        console.log('resobj: ', resObj);
+        //console.log('resobj: ', resObj);
         setUser(resObj.user)
       }).catch(err => console.log(err));
     }
@@ -66,10 +67,8 @@ function App() {
     getUser();
   }, []);
 
+ 
 
-  useEffect(() => {
-    console.log("USER:", user)
-  }, [user])
 
   return (
     <PageNumberContext.Provider value={{ qPageNumber, setQPageNumber }}>

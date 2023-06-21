@@ -53,7 +53,7 @@ const CreateListingPage = () => {
     };
 
     const onPlaceSelected = (place, lat, lng) => {
-        console.log('Selected Place:', place.city);
+        //console.log('Selected Place:', place.city);
         setMesto(place.city);
         setLat(place.lat);
         setLng(place.lng);
@@ -97,7 +97,7 @@ const CreateListingPage = () => {
 
     const handlePscChange = (event) => {
         setPsc(event);
-        console.log(psc)
+        //console.log(psc)
     };
 
 
@@ -118,11 +118,11 @@ const CreateListingPage = () => {
         const igfb = e.target[10].value || user.name;
         const cena = e.target[11].value;
         const autor = user.uid;
-        console.log(user.uid)
-        console.log(mesto)
+        //console.log(user.uid)
+        //console.log(mesto)
 
         try {
-            console.log(selectedImages64)
+            //console.log(selectedImages64)
             await fetch(`${process.env.REACT_APP_API_URL}/api/listings/newlisting`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -149,7 +149,7 @@ const CreateListingPage = () => {
                     'Content-Type': 'application/json',
                 }
             }).then((res) => res.json())
-                .then((data) => {console.log(data); setIsFetching(false); navigate('/myprofile')})
+                .then((data) => {setIsFetching(false); navigate('/myprofile')})
                 .catch((error) => console.log(error));
         } catch (e) {
             console.error(e)

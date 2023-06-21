@@ -48,7 +48,7 @@ const FilterEl = ({
     };
 
     const onPlaceSelected = (place) => {
-        console.log('Selected Place:', place);
+        //console.log('Selected Place:', place);
         setFilter((prevFilter) => ({
             ...prevFilter,
             coords: [place.lat, place.lng],

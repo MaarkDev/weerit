@@ -71,7 +71,7 @@ export default function Navbar() {
                 setTimeout(() => {
                     setIsAnimating(false);
                 }, 300);
-                console.log('down', currentScrollPos)
+                //console.log('down', currentScrollPos)
             }
         }
         if (currentScrollPos < prevScrollPos && !isAnimating) {
@@ -82,7 +82,7 @@ export default function Navbar() {
                 setTimeout(() => {
                     setIsAnimating(false);
                 }, 300);
-                console.log('up', currentScrollPos)
+                //console.log('up', currentScrollPos)
             }
         }
 
@@ -142,18 +142,18 @@ export default function Navbar() {
 
         await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
             .then(res => res.json())
-            .then(data => { setListingsContextArr(data); console.log(data); setQPageNumber(1) })
+            .then(data => { setListingsContextArr(data); setQPageNumber(1) })
             .then(() => navigate(`/browse/${queryString}`));
     }
 
     const resetListingsArr = () => {
-        setListingsContextArr([]);
+        //setListingsContextArr([]);
     }
 
     const getDbUser = async () => {
         await fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${user.uid}`)
         .then((data) => data.json())
-        .then((user) => {setDbUser(user); console.log("DB USER:", user)})
+        .then((user) => {setDbUser(user)})
     }
 
     useEffect(() => {

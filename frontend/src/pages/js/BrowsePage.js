@@ -9,6 +9,7 @@ import QueryContext from "../../context/QueryContext";
 import NoListing from "../../components/js/NoListing";
 import LoadingPage from "./LoadingPage";
 import PageNumberContext from "../../context/PageNumberContext";
+import MoreButton from "../../components/js/MoreButton";
 
 const BrowsePage = () => {
     const location = useLocation();
@@ -67,48 +68,31 @@ const BrowsePage = () => {
             .then(data => {
                 setListingsContextArr(prev => prev.concat(data));
                 setIsFetching(false);
-                console.log(data)
+                //console.log(data)
             })
             //.then(() => navigate(`/browse/${queryString}`));
 
     }
 
-    let previousScrollPosition = 0;
-    const pageBottomHandler = async () => {
-        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-        const currentScroll = scrollTop + clientHeight;
 
-        const isScrollingDown = currentScroll > previousScrollPosition;
-        previousScrollPosition = currentScroll;
-
-        if (isScrollingDown && currentScroll >= scrollHeight - 20) {
-            setIsFetching(true);
-        }
-    };
 
     useEffect(() => {
         if(navLinkRoutes.includes(location.pathname)){
             if(isFetching){
                 getMoreInCat();
-                console.log('2')
+                //console.log('2')
             }
             console.log(isFetching)
         }else{
             if(isFetching){
                 queryHandler();
-                console.log('searchq')
+                //console.log('searchq')
             }
         }
         
     }, [isFetching])
 
-    useEffect(() => {
-        //setListingsContextArr([]);
-        window.addEventListener('scroll', pageBottomHandler);
-        return () => {
-            window.removeEventListener('scroll', pageBottomHandler);
-        };
-    }, [])
+
 
     useEffect(() => {
         //setIsFetching(true)
@@ -177,7 +161,7 @@ const BrowsePage = () => {
 
             const queryString = new URLSearchParams(updatedQuery).toString();
 
-            console.log(queryString)
+            //console.log(queryString)
 
             await fetch(`${process.env.REACT_APP_API_URL}/api/listings/categorysearch?${queryString}`)
                 .then(res => res.json())
@@ -191,7 +175,10 @@ const BrowsePage = () => {
 
         setCurrentQ(query.searchvalue);
 
+        //console.log("CHANGE")
+
     }, [location.pathname])
+
 
     return (
         <div className="browser-page">
@@ -199,12 +186,11 @@ const BrowsePage = () => {
             { typeof currentQ === 'string' && currentQ != '' ? <h2 className="browse-page-res-text">{`Výsledky pre hľadaný výraz: "${currentQ}"`}</h2> : <></>}
             
             {
-                listingsContextArr.length != 0 ? <Catalog /> :
+                listingsContextArr.length != 0 ? <><Catalog /><MoreButton setIsFetching={setIsFetching} /></> :
                 <div className="browse-page-no-search">
                     <NoListing value="Pre hľadaný výraz sa nenašli žiadne inzeráty"/>
                 </div>
             }
-            
             {isFetching ? <LoadingPage /> : null}
         </div>
     )

@@ -99,7 +99,7 @@ const Filter = () => {
         const elements = activeFilterIndexes.map(index => helperArray[index]);
         setIndexes(activeFilterIndexes);
         setFitlerElements(elements);
-        console.log(filter)
+        //console.log(filter)
 
     }, [filter]);
 
@@ -229,7 +229,7 @@ const Filter = () => {
 
         await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
             .then(res => res.json())
-            .then(data => { setListingsContextArr(data); console.log(data); setQPageNumber(1) })
+            .then(data => { setListingsContextArr(data); setQPageNumber(1) })
             .then(navigate(`/browse/${queryString}`));
     }
 
