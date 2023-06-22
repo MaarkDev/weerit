@@ -203,6 +203,7 @@ const BrowsePage = () => {
         if (currentKategoria !== '') {
             redirectHandler();
         }else{
+            setListingsContextArr([]);
             redirectHandlerQ();
         }
 
