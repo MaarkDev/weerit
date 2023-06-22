@@ -169,8 +169,41 @@ const BrowsePage = () => {
 
         }
 
+        const redirectHandlerQ = async () => {
+            setQPageNumber(1)
+            const updatedQuery = {
+                searchvalue: (query.searchvalue || ''),
+                kategoria: filter.kategoria,
+                velkost: filter.velkost,
+                velkostIna: filter.velkostIna,
+                znacka: filter.znacka,
+                znackaIna: filter.znackaIna,
+                farba: filter.farba,
+                cenaod: filter.cenaod,
+                cenado: filter.cenado,
+                zoradit: filter.zoradit,
+                prekoho: filter.prekoho,
+                vokoli: filter.vokoli,
+                psc: filter.psc,
+                mesto: filter.mesto,
+                coords: filter.coords,
+                pagenumber: 1
+            };
+            const queryString = new URLSearchParams(updatedQuery).toString();
+
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
+                .then(res => res.json())
+                .then(data => {
+                    setListingsContextArr(prev => prev.concat(data));
+                    setIsFetching(false);
+                    //console.log(data)
+                })
+        }
+
         if (currentKategoria !== '') {
             redirectHandler();
+        }else{
+            redirectHandlerQ();
         }
 
         setCurrentQ(query.searchvalue);
