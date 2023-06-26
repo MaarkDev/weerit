@@ -111,7 +111,7 @@ const ProfilePage = () => {
                 {showProfile && (listings.length !== 0 ?
                         <div className='profile-page-listing-container'>
                             {listings.map((item) => {
-                                return (<ProfileListing getMyListings={getMyListings} isLoading={isLoading} setIsLoading={setIsLoading} title={item.nazov} price={item.cena} src={item.fotky[0]} uid={item.uid} />)
+                                return (<ProfileListing getMyListings={getMyListings} isLoading={isLoading} setIsLoading={setIsLoading} title={item.nazov} price={item.cena} src={item.fotky[0]} uid={item.uid} fotky={item.fotky}/>)
                             })}
                         </div>
                         :

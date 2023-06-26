@@ -73,8 +73,17 @@ const getMyListings = async (req, res) => {
 };
 
 const deleteListing = async (req, res) => {
+    const fotky = req.body.fotky;
+    for(let i = 0; i < fotky.length; i++){
+        const urlParts = fotky[i].split('/');
+        const last_part = urlParts.pop();
+        const dotIndex = last_part.indexOf('.');
+        const public_id = last_part.substring(0, dotIndex);
+        //console.log(public_id)
+        await cloudinary.uploader.destroy(public_id, function(result) { console.log("image deleted") });
+    }
     const deletedListing = await Listing.findOneAndDelete({ uid: req.body.uid });
-    return res.status(200).json(deletedListing);
+    return res.status(200).json(deletedListing); 
 }
 
 const searchListings = async (req, res) => {

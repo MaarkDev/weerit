@@ -1,7 +1,7 @@
 import '../css/profilelisting.css';
 import { useNavigate } from 'react-router-dom';
 
-const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings }) => {
+const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings, fotky }) => {
     const navigate = useNavigate()
 
     const clickHandler = () => {
@@ -13,7 +13,7 @@ const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMy
         //console.log("to delete: " + uid)
         await fetch(`${process.env.REACT_APP_API_URL}/api/listings/deletelisting`, {
             method: "DELETE",
-            body: JSON.stringify({ uid: uid }),
+            body: JSON.stringify({ uid: uid, fotky: fotky }),
             headers: {
                 'Content-Type': 'application/json'
             }
