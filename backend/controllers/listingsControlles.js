@@ -57,7 +57,7 @@ const getListings = async (req, res) => {
     const query = req.query
     const pageNumber = req.query.pagenumber;
     const pageSize = 20;
-    //console.log("PAGENUMBER: " + query.pagenumber)
+    console.log("PAGENUMBER: " + query.pagenumber)
     const listings = await Listing.find({}).sort({ createdAt: -1 }).skip((pageNumber - 1) * pageSize).limit(pageSize).exec();
     return res.status(200).json(listings);
 };
@@ -140,7 +140,7 @@ const searchListings = async (req, res) => {
 
     try {
         await Listing.createIndexes({ nazov: "text" });
-        //console.log("PAGENUMBERQUERY: " + pageNumber)
+        console.log("PAGENUMBERQUERY: " + pageNumber)
 
         if(query.zoradit == 'odnajnovsieho' || query.zoradit == ''){
             const listings = await Listing.find(queryFilter).sort({ createdAt: -1 }).skip((pageNumber - 1) * pageSize).limit(pageSize).exec();
@@ -171,7 +171,7 @@ const categorySearch = async (req, res) => {
     const query = req.query
     const pageNumber = req.query.pagenumber;
     const pageSize = 20;
-    //console.log(pageNumber)
+    console.log(pageNumber)
     try {
         const category = req.query.kategoria;
         const listings = await Listing.find({ kategoria: category }).skip((pageNumber - 1) * pageSize).limit(pageSize).exec();
