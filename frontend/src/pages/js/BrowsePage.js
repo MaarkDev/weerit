@@ -194,15 +194,17 @@ const BrowsePage = () => {
             await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
                 .then(res => res.json())
                 .then(data => {
-                    setListingsContextArr(prev => prev.concat(data));
+                    setListingsContextArr(data);
                     setIsFetching(false);
                     //console.log(data)
                 })
         }
 
         if (currentKategoria !== '') {
+            //console.log("BROWSEPAGE CALLED REDIRECTHANDLER")
             redirectHandler();
         }else{
+            //console.log("BROWSEPAGE CALLED REDIRECTHANDLERQ")
             setListingsContextArr([]);
             redirectHandlerQ();
         }
@@ -212,6 +214,7 @@ const BrowsePage = () => {
         //console.log("CHANGE")
 
     }, [location.pathname])
+
 
 
     return (

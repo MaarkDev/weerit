@@ -20,7 +20,7 @@ const Filter = () => {
 
     const { filter, setFilter } = useContext(FilterContext);
     const { query, setQuery } = useContext(QueryContext);
-    const { listingsContextArr ,setListingsContextArr } = useContext(ListingsContext)
+    const { listingsContextArr, setListingsContextArr } = useContext(ListingsContext)
     const [indexes, setIndexes] = useState([]);
     const [filterElements, setFitlerElements] = useState([]);
 
@@ -207,6 +207,7 @@ const Filter = () => {
     }
 
     const submitHandler = async () => {
+        console.log("FILTER")
         setListingsContextArr([]);
         const updatedQuery = {
             searchvalue: (query.searchvalue || ''),
