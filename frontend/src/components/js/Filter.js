@@ -207,6 +207,7 @@ const Filter = () => {
     }
 
     const submitHandler = async () => {
+        setListingsContextArr([]);
         const updatedQuery = {
             searchvalue: (query.searchvalue || ''),
             kategoria: filter.kategoria,
@@ -246,7 +247,7 @@ const Filter = () => {
                 <FilterEl cardTitle='V okolí' unique='radius' addFilter={addFilter} setPSC={setPSC} setRadius={setRadius} setCoords={setCoords}/>
             </div>
             <div className='active-filters-container'>
-                {!isNaN(parseFloat(filter.cenaod)) || !isNaN(parseFloat(filter.cenado)) ? <PriceFilterEl /> : <></>}
+                {filter.cenaod !== '' || filter.cenado !== '' ? <PriceFilterEl /> : <></>}
                 {filter.psc !== '' ? <PscFilterEl /> : <></>}
                 {filter.vokoli !== '' && filter.psc !== '' ? <RadiusFilterEl /> : <></>}
                 {filter.velkostIna !== '' ? <SizeFilterEl /> : <></>}
