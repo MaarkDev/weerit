@@ -161,7 +161,7 @@ const ProductPage = () => {
     useEffect(() => {
         setQPageNumber(0);
         setListingsContextArr([]); 
-        //queryHandler();
+        queryHandler();
     }, [])
 
 
