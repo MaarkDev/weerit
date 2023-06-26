@@ -158,11 +158,11 @@ const ProductPage = () => {
         }
     }, [isFetching])
 
-    /*useEffect(() => {
-        //setQPageNumber(0);
-        //setListingsContextArr([]); 
-        queryHandler();
-    }, [])*/
+    useEffect(() => {
+        setQPageNumber(0);
+        setListingsContextArr([]); 
+        //queryHandler();
+    }, [])
 
 
     return (
