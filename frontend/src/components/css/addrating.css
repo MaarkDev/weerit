@@ -12,76 +12,76 @@
 }
 
 .new-rating-container{
-    width: 600px;
+    width: 60rem;
     height: fit-content;
     background-color: white;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     z-index: 999999999;
-    padding: 16px;
+    padding: 1.6rem;
     box-sizing: border-box;
 }
 
 .new-rating-form-text{
-    font-size: 32px;
+    font-size: 3.2rem;
     font-weight: bold;
     margin: 0;
 }
 
 .new-rating-form-input-label{
-    font-size: 16px;
+    font-size: 1.6rem;
     margin: 0;
     font-weight: bold;
-    margin-top: 8px;
+    margin-top: 0.8rem;
 }
 
 .new-rating-form-input{
     width: 100%;
     margin: 0;
-    padding: 4px;
+    padding: 0.4rem;
     box-sizing: border-box;
     resize: none;
-    border-radius: 4px;
-    height: 160px;
-    margin-top: 4px;
-    border: 1px dashed gray;
+    border-radius: 0.4rem;
+    height: 16rem;
+    margin-top: 0.4rem;
+    border: 0.1rem dashed gray;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .new-rating-form-input:focus{
-    border: 1px dashed black;
-    outline: 1px dashed black;
+    border: 0.1rem dashed black;
+    outline: 0.1rem dashed black;
 }
 
 .new-rating-form-number{
     background-color: rgb(216, 216, 216);
-    border-radius: 4px;
+    border-radius: 0.4rem;
     width: 100%;
-    height: 8px;
-    margin-top: 16px;
+    height: 0.8rem;
+    margin-top: 1.6rem;
 }
 
 .new-rating-form-stars{
     display: flex;
     justify-content: space-between;
-    margin-top: 12px;
+    margin-top: 1.2rem;
     width: 100%;
-    margin-left: 2px;
+    margin-left: 0.2rem;
     color: black;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .new-rating-add-button{
     width: 100%;
-    height: 42px;
-    border-radius: 4px;
+    height: 4.2rem;
+    border-radius: 0.4rem;
     background-color: gold;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.6rem;
     color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 18px;
+    margin-top: 1.8rem;
     border: 0;
     outline: 0;
     color: black;
@@ -90,14 +90,14 @@
 .new-rating-add-button:hover{
     cursor: pointer;
     transition: 200ms;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0rem 0rem 0.5rem 0rem rgba(0,0,0,0.75);
 }
 
 .inline-rating-form{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 32px;
+    font-size: 3.2rem;
 }
 
 .new-rating-x{
@@ -115,7 +115,7 @@
     }
     .new-rating-x{
         align-self: last baseline;
-        margin-bottom: 2px;
+        margin-bottom: 0.2rem;
     }
 }
 
@@ -125,6 +125,6 @@
     }
     .new-rating-x{
         align-self: first baseline;
-        margin-top: 4px;
+        margin-top: 0.4rem;
     }
 }

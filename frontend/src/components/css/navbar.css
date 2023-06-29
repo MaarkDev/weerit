@@ -3,30 +3,30 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-bottom: 8px;
+    padding-bottom: 0.8rem;
     background-color: white;
-    border-bottom: 1px solid rgb(220, 220, 220);
+    border-bottom: 0.1rem solid rgb(220, 220, 220);
     z-index: 999;
     position: sticky;
-    top: -54px;
+    top: -5.4rem;
 }
 
 .nav-inner{
     height: fit-content;
     width: 100%;
-    max-width: 1200px;
+    max-width: 120rem;
     display: flex;
     flex-direction: column;
-    padding: 0 32px;
+    padding: 0 3.2rem;
 }
 
 .nav-inner-info{
     display: flex;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: gray;
     font-weight: normal;
     justify-content: space-between;
-    margin-top: 8px;
+    margin-top: 0.8rem;
 }
 
 .nav-inner-info-left{
@@ -35,8 +35,8 @@
 }
 
 .nav-inner-info-left > a{
-    margin-right: 24px; 
-    margin-left: 4px;
+    margin-right: 2.4rem; 
+    margin-left: 0.4rem;
     padding: 0;
     text-decoration: none;
     color: grey;
@@ -50,32 +50,32 @@
 }
 
 .nav-inner-info-right > p{
-    margin-left: 4px;
+    margin-left: 0.4rem;
     padding: 0;
 }
 
 .nav-inner-main{
     display: flex;
     justify-content: space-between;
-    margin-top: -4px;
+    margin-top: -0.4rem;
     align-items: center;
 }
 
 .nav-inner-main-logo{
     font-family: 'Cedarville Cursive', cursive;
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .nav-inner-main-logo > h1{
     margin: 0;
-    font-size: 3em;
+    font-size: 5.4rem;
 }
 
 .nav-inner-main-search{
     display: flex;
     width: 100%;
-    height: 46px;
-    margin-left: 42px;
+    height: 4.6rem;
+    margin-left: 4.2rem;
     align-items: center;
 }
 
@@ -89,8 +89,8 @@
 .nav-inner-main-search-form > input{
     padding: 0;
     margin: 0;
-    font-size: 14px;   
-    padding-left: 12px;
+    font-size: 1.4rem;   
+    padding-left: 1.2rem;
     height: 100%;
     border: 0;
     outline: 0;
@@ -104,7 +104,7 @@
 
 .nav-inner-main-search-form-submit{
     height: 100%;
-    width: 46px;
+    width: 4.6rem;
     background-color: gold;
     display: flex;
     align-items: center;
@@ -116,26 +116,27 @@
 
 .nav-inner-main-search-form-submit-icon{
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.8rem;
 }
 
 .nav-inner-categories{
     width: 100%;
     display: flex;
-    margin-top: -4px;
+    margin-top: -0.4rem;
     font-weight: bold;
     justify-content: space-between;
-    padding: 0px 0px;
+    padding: 0rem 0rem;
     z-index: 998;
 }
 
 .nav-inner-categories > a{
-    padding: 8px 12px 8px 12px;
-    margin-top: 8px;
-    margin-bottom: 4px;
+    padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.4rem;
     cursor: pointer;
     color: black;
     text-decoration: none;
+    font-size: 1.6rem;
 }
 
 .nav-inner-categories > a:hover{
@@ -153,8 +154,8 @@
 }
 
 .nav-add-btn{
-    margin-right: 24px; 
-    margin-left: 4px;
+    margin-right: 2.4rem; 
+    margin-left: 0.4rem;
     padding: 0;
     text-decoration: none;
     color: grey;
@@ -184,13 +185,13 @@
     from{
         top: -100%;
     }to{
-        top: 51px;
+        top: 5.1rem;
     }
 }
  
 @keyframes closeMenu {
     from{
-        top: 51px;
+        top: 5.1rem;
     }to{
         top: -100%;
     }
@@ -214,17 +215,17 @@
 
 @keyframes shrinkNav {
     from{
-        margin-top: -4px;
+        margin-top: -0.4rem;
     }to{
-        margin-top: -72px;
+        margin-top: -7.2rem;
     }
 }
 
 @keyframes expandNav {
     from{
-        margin-top: -72px;
+        margin-top: -7.2rem;
     }to{
-        margin-top: -4px;
+        margin-top: -0.4rem;
     }
 }
 
@@ -232,25 +233,25 @@
 
 @media screen and (max-width: 768px){
     .nav-inner-main.shrink{
-        margin-top: -72px;
+        margin-top: -7.2rem;
         animation: shrinkNav 300ms;
     }
     
     .nav-inner-main.expand{
-        margin-top: -4px;
+        margin-top: -0.4rem;
         animation: expandNav 300ms;
     }   
 
     .nav-mobile-icon{
         color: black;
-        font-size: 28px;
+        font-size: 2.8rem;
         width: fit-content;
-        margin: 0 12px;
+        margin: 0 1.2rem;
     }
 
     .nav-outer{
-        padding-bottom: 12px;
-        top: 0px;
+        padding-bottom: 1.2rem;
+        top: 0rem;
     }
 
     .nav-inner{
@@ -267,11 +268,11 @@
     }
     .nav-inner-main-logo{
         font-family: 'Cedarville Cursive', cursive;
-        font-size: 18px;
+        font-size: 1.8rem;
     }
     .nav-inner-main-search{
         margin-left: 0;
-        margin-top: -18px;
+        margin-top: -1.8rem;
     }
     .nav-inner-categories{
         flex-direction: column;
@@ -279,7 +280,7 @@
         margin: 0;
         position: fixed;
         top: -100%;
-        height: calc(100svh - 52px);
+        height: calc(100svh - 5.2rem);
         justify-content: space-evenly;
     }
 
@@ -290,14 +291,14 @@
     .hamburger-menu.shown{
         background-color: rgba(0, 0, 0, 0.9);
         color: white !important;
-        padding-bottom: 12px;
+        padding-bottom: 1.2rem;
         animation: showMenu 300ms;
-        top: 51px;
+        top: 5.1rem;
     }
     .hamburger-menu.hidden{
         background-color: rgba(0, 0, 0, 0.9);
         color: white !important;
-        padding-bottom: 12px;
+        padding-bottom: 1.2rem;
         animation: closeMenu 300ms;
         top: -100%;
     }
@@ -312,27 +313,27 @@
     }
 
     .nav-hamburger-section{
-        height: 52px;
+        height: 5.2rem;
         width: 100vw;
         display: flex;
         background-color: white;
         justify-content: space-between;
         align-items: center;
-        padding-top: 2px;
+        padding-top: 0.2rem;
         z-index: 999;
     }
     .nav-hamburger-container{
-        width: 32px;
-        height: 32px;
+        width: 3.2rem;
+        height: 3.2rem;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
     }
     .nav-hamburger-line{
         width: 100%;
-        height: 3px;
+        height: 0.3rem;
         background-color: black;
-        border-radius: 4px;
+        border-radius: 0.4rem;
     }
 
     .nav-hamburger-container.shown{
@@ -363,5 +364,5 @@
 }
 
 .dashboard{
-    padding-left: 24px;
+    padding-left: 2.4rem;
 }

@@ -161,14 +161,14 @@ const CreateListingPage = () => {
         <div className='listing-page-wrapper-outer'>
             <div className='listing-page-wrapper-inner'>
                 <p className='new-listing-page-title'>Pridanie Inzerátu</p>
-                <p className='new-listing-page-info'><span className='red'><b>*</b></span> Povinné</p>
+                <p className='new-listing-page-info normalise'><span className='red'><b>*</b></span> Povinné</p>
                 <form className='new-listing-form' onSubmit={submitHandler}>
                     <div className='new-listing-form-inputs'>
                         <div className='new-listing-form-inputs-left'>
                             <p className='new-listing-input-label'>Názov:<span className='red'>*</span></p>
-                            <input className='new-listing-input-field' type='text' placeholder='' required />
+                            <input className='new-listing-input-field' type='text' placeholder='' required maxLength="60"/>
                             <p className='new-listing-input-label'>Popis:<span className='red'>*</span></p>
-                            <textarea className='new-listing-input-field-textarea' placeholder='' rows="4" cols="20" required />
+                            <textarea className='new-listing-input-field-textarea' placeholder='' rows="4" cols="20" required maxLength="600"/>
                             <p className='new-listing-input-label'>Kategória:<span className='red'>*</span></p>
                             <select name='Vyberte kategóriu' className='new-listing-input-select' required>
                                 <option value='tricka'>Tričká</option>
@@ -180,14 +180,14 @@ const CreateListingPage = () => {
                                 <option value='plavky'>Plavky</option>
                             </select>
                             <p className='new-listing-input-label'>Značka:<span className='red'>*</span></p>
-                            <input className='new-listing-input-field' type='text' placeholder='' required />
+                            <input className='new-listing-input-field' type='text' placeholder='' required maxLength="20"/>
                             <p className='new-listing-input-label'>Veľkosť:<span className='red'>*</span></p>
-                            <input className='new-listing-input-field' type='text' placeholder='' required />
+                            <input className='new-listing-input-field' type='text' placeholder='' required maxLength="20"/>
                         </div>
                         <div className='divider'></div>
                         <div className='new-listing-form-inputs-right'>
                             <p className='new-listing-input-label'>Farba:</p>
-                            <input className='new-listing-input-field' type='text' placeholder='' />
+                            <input className='new-listing-input-field' type='text' placeholder='' maxLength="20"/>
                             <p className='new-listing-input-label'>Pre koho:</p>
                             <select name='Pre koho' className='new-listing-input-select'>
                                 <option value='muza'>Muža</option>
@@ -196,15 +196,15 @@ const CreateListingPage = () => {
                                 <option value='unisex'>Unisex</option>
                             </select>
                             <p className='new-listing-input-label' >PSČ:<span className='red'>*</span></p>
-                            <input className='new-listing-input-field' onChange={(e) => {handlePscChange(e.target.value); handlePlaceSelect()}} type='text' placeholder='' required />
+                            <input className='new-listing-input-field' maxLength="20" onChange={(e) => {handlePscChange(e.target.value); handlePlaceSelect()}} type='text' placeholder='' required />
                             <p className='new-listing-input-label'>Telefón:<span className='red'>*</span></p>
-                            <input className='new-listing-input-field' type='text' placeholder='' required />
+                            <input className='new-listing-input-field' type='text' placeholder='' required maxLength="20"/>
                             <p className='new-listing-input-label'>Mail:</p>
-                            <input className='new-listing-input-field' type='email' placeholder='' />
+                            <input className='new-listing-input-field' type='email' placeholder='' maxLength="40"/>
                             <p className='new-listing-input-label'>IG/FB:</p>
-                            <input className='new-listing-input-field' type='text' placeholder='Tvoje meno bude automaticky vyplnené ak necháš túto kolonku prázdnu' />
+                            <input className='new-listing-input-field' maxLength="40" type='text' placeholder='Tvoje meno bude automaticky vyplnené ak necháš túto kolonku prázdnu' />
                             <p className='new-listing-input-label'>Cena:<span className='red'>*</span></p>
-                            <input className='new-listing-input-field' type='text' placeholder='' required />
+                            <input className='new-listing-input-field' maxLength="20" type='text' placeholder='' required />
                         </div>
                     </div>
                     <div className='new-listing-selected-images-container'>

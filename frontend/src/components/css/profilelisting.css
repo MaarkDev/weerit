@@ -1,6 +1,6 @@
 .profile-listing-wrapper{
-    border-radius: 4px;
-    margin-top: 32px;
+    border-radius: 0.4rem;
+    margin-top: 3.2rem;
 }
 
 .profile-listing-container{
@@ -19,23 +19,23 @@
 
 .profile-listing-photo > img{
     width: 100%;
-    height: 200px;
+    height: 20rem;
     object-fit: cover;
 }
 
 .profile-listing-text > p{
-    margin: 2px 0;
-    margin-left: 4px;
+    margin: 0.2rem 0;
+    margin-left: 0.4rem;
 }
 
 .profile-listing-delete-button{
     width: 100%;
-    height: 36px;
+    height: 3.6rem;
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 0.8rem;
 
 }
 
@@ -51,9 +51,10 @@
 }
 
 .profile-listing-text-right{
-    margin-left: 4px;
+    margin-left: 0.4rem;
+    font-size: 1.6rem;
 }
 
 .user-visit-listing{
-    padding-bottom: 4px;
+    padding-bottom: 0.4rem;
 }

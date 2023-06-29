@@ -91,7 +91,7 @@ const FilterEl = ({
         <div className='filter-el-wrapper' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaverHandler} ref={parentRef}>
             <div className='filter-el' onClick={handleClick}>
                 <p className='filter-el-title'>{title}</p>
-                <FontAwesomeIcon icon={faChevronDown} />
+                <FontAwesomeIcon icon={faChevronDown} className='faChevronDown'/>
             </div>
             <div className={dropdownClass()}>
                 <div className='dropdown-content'>

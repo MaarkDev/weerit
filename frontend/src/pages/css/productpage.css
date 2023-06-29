@@ -1,6 +1,6 @@
 .product-page-container {
-    max-width: 1264px;
-    padding: 32px;
+    max-width: 126.4rem;
+    padding: 3.2rem;
     box-sizing: border-box;
     margin: 0 auto;
 }
@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-around;
     align-self: center;
-    margin-top: 36px;
+    margin-top: 3.6rem;
 }
 
 .product-images {
@@ -25,7 +25,7 @@
 }
 
 .product-title {
-    font-size: 36px;
+    font-size: 3.6rem;
     font-weight: bold;
     margin: 0;
 
@@ -33,34 +33,35 @@
 
 .product-detail-div {
     display: flex;
+    font-size: 1.6rem;
     justify-content: space-between;
     white-space: pre-wrap;
 }
 
 .product-details>p {
-    margin: 4px 0;
+    margin: 0.4rem 0;
 }
 
 .product-contact>p {
-    margin: 4px 0;
+    margin: 0.4rem 0;
 }
 
 .product-price {
     margin: 0;
-    margin-top: 12px;
-    font-size: 36px;
+    margin-top: 1.2rem;
+    font-size: 3.6rem;
     font-weight: bold;
 }
 
 .product-add-to-favs{
     display: flex;
     align-items: center;
-    margin-top: 4px;
+    margin-top: 0.4rem;
     font-weight: bold;
     width: fit-content;
     color: gray;
-    font-size: 16px;
-    margin-right: 12px;
+    font-size: 1.6rem;
+    margin-right: 1.2rem;
 }
 
 .product-add-to-favs.profile-click:hover{
@@ -78,11 +79,12 @@
 
 .product-add-to-favs > p{
     margin: 0;
-    margin-left: 4px;
+    margin-left: 0.4rem;
 }
 
 .product-desc{
     white-space: pre-line;
+    font-size: 1.6rem;
 }
 
 .product-inline{
@@ -101,33 +103,33 @@
     }
 
     .product-add-to-favs{
-        font-size: 16px;
-        margin-top: 8px;
+        font-size: 1.6rem;
+        margin-top: 0.8rem;
     }
     .profile-click{
-        margin-top: 8px;
+        margin-top: 0.8rem;
     }
 
     .product-outer-wrapper {
         flex-direction: column;
         padding: 0;
         width: 90vw;
-        margin-bottom: 36px;
+        margin-bottom: 3.6rem;
     }
 
     .product-images {
         width: 90vw;
-        margin-top: -18px;
+        margin-top: -1.8rem;
     }
 
     .product-title{
-        line-height: 42px;
-        margin-bottom: 8px;
+        line-height: 4.2rem;
+        margin-bottom: 0.8rem;
     }
 
     .product-info {
         width: 100%;
-        font-size: 16px;
+        font-size: 1.6rem;
     }
 
     .product-detail-div {
@@ -136,23 +138,23 @@
 
     .product-details>p {
         margin: 0;
-        margin-top: 8px;
-        font-size: 16px;
+        margin-top: 0.8rem;
+        font-size: 1.6rem;
     }
 
     .product-contact>p {
-        margin-top: 8px;
-        font-size: 16px;
+        margin-top: 0.8rem;
+        font-size: 1.6rem;
     }
 
     .product-price {
         background-color: rgb(0, 0, 0);
         color: white;
         text-align: right;
-        border-radius: 4px;
-        padding: 8px 12px;
-        font-size: 36px;
-        margin-top: 24px;
+        border-radius: 0.4rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 3.6rem;
+        margin-top: 2.4rem;
     }
 
     .product-inline{

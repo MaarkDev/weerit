@@ -1,23 +1,24 @@
 .outer-footer{
     width: 100%;
     height: fit-content;
-    max-width: 1200px;
+    max-width: 120rem;
     margin: 0 auto;
-    border-top: 1px dashed gray;
+    border-top: 0.1rem dashed gray;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
     align-items: center;
-    padding: 64px 24px;
+    padding: 6.4rem 2.4rem;
 }
 
 .footer-socials{
     display: flex;
-    flex-direction: row;flex: 1;
+    flex-direction: row;
+    flex: 1;
     flex-basis: 0; 
     align-items: center;
     justify-content: space-around;
-    font-size: 48px;
+    font-size: 4.8rem;
 }
 
 .footer-contact{
@@ -33,6 +34,7 @@
 .footer-contact > p{
     margin: 0;
     color: gray;
+    font-size: 1.6rem;
 }
 
 .footer-about{
@@ -44,6 +46,7 @@
 
 .footer-about > P{
     margin: 0;
+    font-size: 1.6rem;
     color: gray;
 }
 
@@ -54,12 +57,12 @@
 
     .footer-contact{
         width: 90vw;
-        margin-bottom: 48px;
+        margin-bottom: 4.8rem;
     }
     
     .footer-socials{
         width: 90vw;
-        margin-bottom: 48px;
+        margin-bottom: 4.8rem;
     }
     
 }

@@ -10,13 +10,13 @@
     text-align: left;
     width: 100%;
     margin: 0;
-    margin-top: 24px;
-    margin-bottom: 0px;
-    max-width: 1200px;
+    margin-top: 2.4rem;
+    margin-bottom: 0rem;
+    max-width: 120rem;
 }
 
 .browse-page-no-search{
     width: 100% !important;
-    max-width: 1200px !important;
-    margin-top: -4px !important;
+    max-width: 120rem !important;
+    margin-top: -0.4rem !important;
 }

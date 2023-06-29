@@ -1,14 +1,14 @@
 .filter-active-el{
     display: flex;
-    height: 32px;
+    height: 3.2rem;
     width: fit-content;
     align-items: center;
     background-color: rgb(232, 232, 232);
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
     justify-content: space-between;
     font-weight: normal;
-    margin: 2px;
+    margin: 0.2rem;
 }
 
 .filter-active-el:hover{
@@ -17,12 +17,12 @@
 }
 
 .filter-active-text{
-    margin-right: 14px;
+    margin-right: 1.4rem;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 1.6rem;
 }
 
 .filter-active-x{
-    font-size: 10px;
-    padding-right: 2px;
+    font-size: 1rem;
+    padding-right: 0.2rem;
 }

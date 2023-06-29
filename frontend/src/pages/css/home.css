@@ -1,11 +1,11 @@
 .page-home-container{
     width: 100%;
-    max-width: 1264px;
+    max-width: 126.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 32px auto;
-    padding: 0 32px;
+    margin: 3.2rem auto;
+    padding: 0 3.2rem;
     box-sizing: border-box;
     height: fit-content;
     margin-bottom: 0;
@@ -13,10 +13,10 @@
 
 .image-slideshow-container{
     width: 100%;
-    height: 300px;
+    height: 30rem;
     margin: 0 auto;
     contain: content;   
-    border-radius: 16px;
+    border-radius: 1.6rem;
     z-index: 0;
 }
 
@@ -43,23 +43,23 @@
     margin: 0;
     color: rgb(255, 255, 255);
     font-weight: bold;
-    font-size: 48px;
+    font-size: 4.8rem;
     text-align: center;    
     width: 100%;
     transition: 200ms;
-    text-shadow: 0px 0px 16px black;
+    text-shadow: 0 0 1.6rem black;
 }
 
 @media screen and (max-width: 768px){
     .page-home-container{
         padding: 0 0;
         width: 90vw;
-        margin: 24px auto;
+        margin: 2.4rem auto;
     }
     .image-slideshow-container{
-        height: 200px;
+        height: 20rem;
     }
     .slider-img{
-        height: 200px;
+        height: 20rem;
     }
 }

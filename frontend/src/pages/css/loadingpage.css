@@ -12,10 +12,10 @@
 }
 
 .loading-square{
-    height: 100px;
-    width: 100px;
+    height: 10rem;
+    width: 10rem;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,12 +24,12 @@
 .loading-icon{
     animation: 1.5s linear infinite spinner;
     animation-play-state: inherit;
-    border: solid 5px #cfd0d1;
+    border: solid 0.5rem #cfd0d1;
     border-bottom-color: gold;
     border-radius: 50%;
     content: "";
-    height: 40px;
-    width: 40px;
+    height: 4rem;
+    width: 4rem;
     will-change: transform;
 }
 

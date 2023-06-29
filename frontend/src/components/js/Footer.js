@@ -19,7 +19,7 @@ const Footer = () => {
             
             <div className='footer-about'>
                 <p><b>Weerit.sk</b></p>
-                <p>Weerit je projekt, ktorý mňa ako 18 ročného programátora mal skutočne ostestovať a uceliť všetko čo som sa o full stack web developmente naučil {'(MERN)'}, tak teda dúfam, že sa ti to tu páči :{')'}</p>
+                <p>Weerit je projekt, ktorý mňa ako 18 ročného programátora mal skutočne otestovať a uceliť všetko čo som sa o full stack web developmente naučil {'(MERN)'}, tak teda dúfam, že sa ti to tu páči :{')'}</p>
             </div>
         </div>
     )
