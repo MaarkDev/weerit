@@ -95,6 +95,13 @@ const ProfilePage = () => {
         setRatingClass('new-listing-page-title cursor-pointer')
     }
 
+    const copyProfileLink = () => {
+        navigator.clipboard.writeText(`${process.env.REACT_APP_FRONTEND_URL}/profile/${user.uid}`)
+            .then(() => {
+                console.log('Text copied to clipboard');
+            })
+    }
+
     return (
         <div className='profile-page-outer-wrapper'>
             <div className='profile-page-wrapper-inner'>
@@ -103,9 +110,15 @@ const ProfilePage = () => {
                     <p className={favHeadingClass} onClick={showFavHandler}>Obľúbené</p>
                     <p className={ratingClass} onClick={showRatingHandler}>Hodnotenia</p>
                 </div>
-                <div className='logout-button' onClick={logout}>
-                    <p className='logout-button-text'>Odhlásiť sa</p>
+                <div className='profile-page-button-container'>
+                    <div className='logout-button' onClick={logout}>
+                        <p className='logout-button-text'>Odhlásiť sa</p>
+                    </div>
+                    <div className='logout-button' onClick={copyProfileLink}>
+                        <p className='logout-button-text'>Skopírovať link k profilu</p>
+                    </div>
                 </div>
+                
                 
 
                 {showProfile && (listings.length !== 0 ?
