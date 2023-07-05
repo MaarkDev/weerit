@@ -111,6 +111,10 @@
     gap: 0.4rem;
 }
 
+.copy-profile-link:hover{
+    background-color: black !important;
+}
+
 @media screen and (max-width: 590px) {
     .profile-rating{
         grid-template-columns: repeat(1, 1fr);

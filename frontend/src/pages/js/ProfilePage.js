@@ -96,9 +96,12 @@ const ProfilePage = () => {
     }
 
     const copyProfileLink = () => {
+        setIsLoading(true);
         navigator.clipboard.writeText(`${process.env.REACT_APP_FRONTEND_URL}/profile/${user.uid}`)
             .then(() => {
-                console.log('Text copied to clipboard');
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 1000);
             })
     }
 
