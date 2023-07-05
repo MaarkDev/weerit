@@ -118,7 +118,7 @@ const ProfilePage = () => {
                         <p className='logout-button-text'>Odhlásiť sa</p>
                     </div>
                     <div className='logout-button' onClick={copyProfileLink}>
-                        <p className='logout-button-text'>Skopírovať link k profilu</p>
+                        <p className='logout-button-text copy-profile-link'>Skopírovať link k profilu</p>
                     </div>
                 </div>
                 

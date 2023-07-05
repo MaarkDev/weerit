@@ -21,15 +21,15 @@ app.use(cors({
 }));
 
 
-//app.set('trust proxy', 1)
+app.set('trust proxy', 1)
 app.use(
     cookieSession({
       name: "__session",
       keys: ["weerit"],
       maxAge: 24 * 60 * 60 * 100,
-      //secure: true, // COMMENT IN DEV
-      //httpOnly: true,
-      //sameSite: 'none' // COMMENT IN DEV
+      secure: true, // COMMENT IN DEV
+      httpOnly: true,
+      sameSite: 'none' // COMMENT IN DEV
     })
 );;
 
