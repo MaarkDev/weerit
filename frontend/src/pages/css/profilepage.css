@@ -112,7 +112,7 @@
 }
 
 .copy-profile-link:hover{
-    background-color: black !important;
+    background-color: rgb(26, 26, 26) !important;
 }
 
 @media screen and (max-width: 590px) {
