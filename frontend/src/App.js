@@ -97,7 +97,7 @@ function App() {
 
               </Routes>
               <Space />
-              <CookieConsent debug={true}
+              <CookieConsent
                 style={{ background: 'black', color: 'white', textAlign: 'left', borderTop: '1px dashed grey'}}
                 buttonText='Rozumiem'
                 expires={365}
