@@ -170,10 +170,10 @@ const ProductPage = () => {
         <div className='product-page-container'>
             <div className='product-outer-wrapper'>
                 <div className='product-images'>
-                    <Carousel width={'100%'} height={'200px'}>
+                    <Carousel width={'100%'} height={'20rem'} dynamicHeight={true}>
                         {photoArr.map((url) => (
                             <div>
-                                <img src={url} style={{objectFit: 'cover', maxHeight: '400px'}}/>
+                                <img src={url} style={{objectFit: 'cover', maxHeight: '40rem'}}/>
                             </div>
                         ))}
                         

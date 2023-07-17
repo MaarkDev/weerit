@@ -15,8 +15,12 @@
 }
 
 .product-images {
-    height: 100%;
+    height: fit-content !important;
     width: 30%;
+}
+
+.carousel .slide img {
+    pointer-events: all !important;
 }
 
 .product-info {
