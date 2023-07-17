@@ -18,6 +18,7 @@ import PageNumberContext from './context/PageNumberContext';
 import UserPage from './pages/js/UserPage';
 import Footer from './components/js/Footer';
 import AdminPage from './pages/js/AdminPage';
+import CookieConsent from 'react-cookie-consent';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -96,6 +97,13 @@ function App() {
 
               </Routes>
               <Space />
+              <CookieConsent debug={true}
+                style={{ background: 'black', color: 'white', textAlign: 'left', borderTop: '1px dashed grey'}}
+                buttonText='Rozumiem'
+                expires={365}
+              >
+                Táto stránka pouŽíva cookies, používaním tejto stránky súhlasím so spracovaním osobných údajov. <a style={{textDecoration: 'none', color: 'grey'}} href='https://www.privacypolicygenerator.info/live.php?token=HO0mSN7I3pVDCx5TwzlBTEgYI9OTuKCc'>Cookie policy</a>
+              </CookieConsent>
               <Footer />
             </FilterContext.Provider>
           </AuthContext.Provider>
