@@ -194,7 +194,7 @@ export default function Navbar() {
 
                         <div className='nav-inner-info-left mail-icon'>
                             <FontAwesomeIcon icon={faEnvelope} />
-                            <a href='mailto:weerit@gmail.com'>weerit@gmail.com</a>
+                            <a href='mailto:weerit@gmail.com'>weeritinfo@gmail.com</a>
                         </div>
 
                         <div className='nav-inner-info-left mail-icon'>

@@ -12,9 +12,7 @@ const Footer = () => {
                 <p>weerit@gmail.com</p>
             </div>
             <div className='footer-socials'>
-                <FontAwesomeIcon icon={faFacebookSquare} />
                 <FontAwesomeIcon icon={faInstagram} />
-                <FontAwesomeIcon icon={faLinkedin} />
             </div>
             
             <div className='footer-about'>
