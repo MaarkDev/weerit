@@ -199,7 +199,7 @@ export default function Navbar() {
 
                         <div className='nav-inner-info-left mail-icon'>
                             <FontAwesomeIcon icon={faPhone} />
-                            <a href='href="tel:+4733378901"'>+421 944 837 248</a>
+                            <a href='href="tel:+4733378901"'>+421 944 738 259</a>
                         </div>
 
                     </div>
