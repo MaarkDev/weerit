@@ -45,7 +45,7 @@ app.use('/api/listings', listingRoutes);
 
 
 
-mongoose.connect(process.env.MONGO_URI_DEV)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     // Listen for requests
     app.listen(PORT, () => {
