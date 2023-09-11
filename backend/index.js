@@ -15,7 +15,7 @@ const passport = require('passport')
 const passportCfg = require('./passport')
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.BACKEND_URL, process.env.FRONTEND_URL_NOWWW],
+  origin: [process.env.FRONTEND_URL, process.env.FRONTEND_URL_NOWWW],
   methods: 'GET,POST,PUT,DELETE,PATCH',
   credentials: true
 }));
@@ -31,7 +31,7 @@ app.use(
       httpOnly: true,
       sameSite: 'none' // COMMENT IN DEV
     })
-);;
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -45,7 +45,7 @@ app.use('/api/listings', listingRoutes);
 
 
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI_DEV)
   .then(() => {
     // Listen for requests
     app.listen(PORT, () => {

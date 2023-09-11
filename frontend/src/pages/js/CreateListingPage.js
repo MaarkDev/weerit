@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AuthContext from '../../context/AuthContext'
 import LoadingPage from './LoadingPage';
 import { useNavigate } from 'react-router-dom';
+import encryptData from '../../files/sec';
 
 const CreateListingPage = () => {
     const [selectedImages, setSelectedImages] = useState([])
@@ -143,10 +144,11 @@ const CreateListingPage = () => {
                     fotky: selectedImages64,
                     mesto: mesto,
                     lat: lat,
-                    lng: lng
+                    lng: lng                
                 }),
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
                 }
             }).then((res) => res.json())
                 .then((data) => {setIsFetching(false); navigate('/myprofile')})

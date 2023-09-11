@@ -1,5 +1,6 @@
 import '../css/profilelisting.css';
 import { useNavigate } from 'react-router-dom';
+import encryptData from '../../files/sec';
 
 const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings, fotky }) => {
     const navigate = useNavigate()
@@ -15,7 +16,8 @@ const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMy
             method: "DELETE",
             body: JSON.stringify({ uid: uid, fotky: fotky }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             }
         }).then(() => {
             getMyListings().then(() => setIsLoading(false));

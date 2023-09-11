@@ -1,5 +1,6 @@
 import '../css/profilelisting.css';
 import { useNavigate } from 'react-router-dom';
+import encryptData from '../../files/sec';
 
 const FavoriteListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings, user }) => {
     const navigate = useNavigate()
@@ -14,6 +15,7 @@ const FavoriteListing = ({ title, price, src, uid, isLoading, setIsLoading, getM
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             },
             body: JSON.stringify({
                 uid: user.uid,

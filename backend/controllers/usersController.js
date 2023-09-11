@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel'); 
+const sec = require('../sec')
 
 const createUser = async (req, res) => {
     const { uid, mail, name } = req.body;
@@ -28,6 +29,10 @@ const createNewUserRating = async (req, res) => {
     const currentDate = new Date();
     const newRatingObj = { text, stars, name, autor, user, date: currentDate, uid }
     
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
+
     try{
         const foundUser = await User.findOne({ uid: user });
         const me = await User.findOne({ uid: autor });
@@ -48,6 +53,10 @@ const createNewUserRating = async (req, res) => {
 
 const deleteRating = async (req, res) => {
     const { uid, user, autor } = req.body;
+
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
 
     try {
         const updatedUser = await User.findOneAndUpdate(

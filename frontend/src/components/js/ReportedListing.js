@@ -1,5 +1,6 @@
 import '../css/reportedlisting.css'
 import { useNavigate } from 'react-router-dom'
+import encryptData from '../../files/sec';
 
 const ReportedListing = ({ src, title, price, uid, isLoading, setIsLoading, rerender, setRerender }) => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const ReportedListing = ({ src, title, price, uid, isLoading, setIsLoading, rere
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             },
             body: JSON.stringify({
                 uid: uid
@@ -23,6 +25,7 @@ const ReportedListing = ({ src, title, price, uid, isLoading, setIsLoading, rere
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             },
             body: JSON.stringify({
                 uid: uid

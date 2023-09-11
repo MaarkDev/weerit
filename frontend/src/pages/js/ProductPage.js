@@ -18,6 +18,7 @@ import QueryContext from '../../context/QueryContext';
 import PageNumberContext from '../../context/PageNumberContext';
 import ListingsContext from '../../context/ListingsContext';
 import MoreButton from '../../components/js/MoreButton';
+import encryptData from '../../files/sec';
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -75,6 +76,7 @@ const ProductPage = () => {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             },
             body: JSON.stringify({
                 uid: user.uid,
@@ -90,6 +92,7 @@ const ProductPage = () => {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             },
             body: JSON.stringify({
                 uid: user.uid,
@@ -109,6 +112,7 @@ const ProductPage = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             },
             body: JSON.stringify({
                 uid: id

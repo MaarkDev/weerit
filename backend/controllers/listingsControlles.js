@@ -1,6 +1,7 @@
 const Listing = require('../models/listingModel');
 const User = require('../models/userModel');
 const Reported = require('../models/reportedModel');
+const sec = require('../sec')
 
 const router = require('express').Router();
 const cloudinary = require('cloudinary').v2;
@@ -16,7 +17,11 @@ const createListing = async (req, res) => {
     const { autor, uid, nazov, popis, kategoria, znacka, velkost,
         farba, prekoho, psc, telefon, mail, igfb, cena, fotky, mesto, lat, lng } = req.body;
 
-    const url_array = [];
+    let url_array = [];
+
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
 
     try {
         for (let i = 0; i < fotky.length; i++) {
@@ -74,6 +79,11 @@ const getMyListings = async (req, res) => {
 
 const deleteListing = async (req, res) => {
     const fotky = req.body.fotky;
+
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
+
     for(let i = 0; i < fotky.length; i++){
         const urlParts = fotky[i].split('/');
         const last_part = urlParts.pop();
@@ -191,6 +201,10 @@ const categorySearch = async (req, res) => {
 };
 
 const addFavorite = async (req, res) => {
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
+    
     const uid = req.body.uid;
     const newFavoriteId = req.body.newFavoriteId;
     try {
@@ -208,6 +222,10 @@ const addFavorite = async (req, res) => {
 const removeFavorite = async (req, res) => {
     const uid = req.body.uid;
     const favoriteIdToRemove = req.body.favoriteIdToRemove;
+
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
 
     try {
         const user = await User.findOneAndUpdate(
@@ -257,12 +275,18 @@ const reportListing = async (req, res) => {
 }
 
 const deleteReported = async (req, res) => {
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
     const removedFromCollection = await Reported.findOneAndDelete({ uid: req.body.uid });
     const deleted = await Listing.findOneAndDelete({ uid: req.body.uid });
     res.json(deleted)
 }
 
 const removeReportedFromCollection = async (req, res) => {
+    if(!sec.checkKey(req, res)){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
     const removedFromCollection = await Reported.findOneAndDelete({ uid: req.body.uid });
     res.json(removedFromCollection)
 }

@@ -4,7 +4,7 @@ import { faClose, faStar, faX } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-
+import encryptData from '../../files/sec';
 
 const AddRating = ({ setShowAddRating, showAddRating, user, setIsLoading, showRatingsHandler, rerender, setRerender }) => {
     const [stars, setStars] = useState(3);
@@ -32,7 +32,8 @@ const AddRating = ({ setShowAddRating, showAddRating, user, setIsLoading, showRa
             method: 'POST',
             body: JSON.stringify(reviewObj),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             }
         })
             .then(res => res.json()).then(() => { setIsLoading(false); showRatingsHandler(); setRerender(!rerender) })

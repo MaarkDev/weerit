@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react';
+import encryptData from '../../files/sec';
 
 const RatingCard = ({ text, ratedUser, date, stars, name, autor, uid, rerender, setIsLoading, setRerender }) => {
     const { user } = useContext(AuthContext);
@@ -29,7 +30,8 @@ const RatingCard = ({ text, ratedUser, date, stars, name, autor, uid, rerender, 
                 autor: userId
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
             }
         }).then((res) => res.json()).then((data) => {setIsLoading(false); setRerender(!rerender)})
     }
