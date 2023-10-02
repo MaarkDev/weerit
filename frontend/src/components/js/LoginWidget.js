@@ -16,7 +16,7 @@ const LoginWidget = () => {
         }, 4000)
     }, [])
 
-    return(
+    return (
         <div className={widgetClass}>
             <div className='login-widget-text-container'>
                 <div className='login-widget-title'>

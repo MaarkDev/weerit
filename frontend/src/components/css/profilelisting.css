@@ -58,3 +58,7 @@
 .user-visit-listing{
     padding-bottom: 0.4rem;
 }
+
+.bg-black:hover{
+    background-color: rgb(58, 58, 58) !important;
+}

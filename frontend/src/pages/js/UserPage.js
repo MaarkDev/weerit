@@ -1,38 +1,31 @@
 import '../css/profilepage.css'
-import ProfileListing from '../../components/js/ProfileListing'
 import NoListing from '../../components/js/NoListing'
 import AuthContext from '../../context/AuthContext';
-import { useContext, useEffect, useState } from 'react'
 import LoadingPage from './LoadingPage';
-import FavoriteListing from '../../components/js/FavoriteListing';
-import { useParams } from 'react-router-dom';
 import UserListing from '../../components/js/UserListing';
 import AddRating from '../../components/js/AddRating';
-import { useNavigate } from 'react-router-dom';
 import RatingCard from '../../components/js/RatingCard';
+import { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
-    const [listings, setListings] = useState([]);
-    const { user } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false)
     const [showRatings, setShowRatings] = useState(false);
-    const [favListingsId, setFavListingsId] = useState([]);
     const [ratingsList, setRatingList] = useState([]);
-
     const [showAddRating, setShowAddRating] = useState(false);
-
-    const { id } = useParams();
     const [visitedUser, setVisitedUser] = useState({})
     const [visitedUserListings, setVisitedUserListings] = useState([])
-
     const [rerender, setRerender] = useState(false);
-      
+
+    const { user } = useContext(AuthContext)
+    const { id } = useParams();
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        //setIsLoading(true);
         const uid = user?.uid || '';
-        if(id == uid){
+        if (id == uid) {
             navigate('/myprofile');
         }
     }, [])
@@ -55,12 +48,10 @@ const UserPage = () => {
 
     useEffect(() => {
         Promise.all([
-            fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${id}`).then(data => data.json()).then((data) => {setVisitedUser(data); setRatingList(data.ratings)}),
+            fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${id}`).then(data => data.json()).then((data) => { setVisitedUser(data); setRatingList(data.ratings) }),
             fetch(`${process.env.REACT_APP_API_URL}/api/listings/mylistings?uid=${id}`).then(data => data.json()).then((data) => setVisitedUserListings(data))
         ])
 
-        //console.log(visitedUser.ratings)
-        
     }, [rerender])
 
     return (
@@ -70,20 +61,20 @@ const UserPage = () => {
                     <p className={myProfileClass} onClick={showProfileHandler}>{visitedUser.name}</p>
                     <p className={favHeadingClass} onClick={showRatingsHandler}>Hodnotenia</p>
                 </div>
-                
-                    {
-                        user ?<div className='logout-button rating-button' onClick={() => setShowAddRating(true)}>
-                                <p className='logout-button-text'>Ohodnotiť používatela</p>
-                            </div>
+
+                {
+                    user ? <div className='logout-button rating-button' onClick={() => setShowAddRating(true)}>
+                        <p className='logout-button-text'>Ohodnotiť používatela</p>
+                    </div>
                         : <></>
-                    }
-                    
-                
+                }
+
+
                 {!showRatings ?
                     visitedUserListings.length !== 0 ?
                         <div className='profile-page-listing-container'>
                             {visitedUserListings.map((item) => {
-                                return (<UserListing isLoading={isLoading} setIsLoading={setIsLoading} title={item.nazov} price={item.cena} src={item.fotky[0]} uid={item.uid}/>)
+                                return (<UserListing isLoading={isLoading} setIsLoading={setIsLoading} title={item.nazov} price={item.cena} src={item.fotky[0]} uid={item.uid} />)
                             })}
                         </div>
                         :

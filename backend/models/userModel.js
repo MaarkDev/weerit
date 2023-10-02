@@ -22,6 +22,9 @@ const userSchema = new Schema({
     },
     createdRatings: {
         type: Array
+    },
+    apiToken: {
+        type: String
     }
  }) 
 

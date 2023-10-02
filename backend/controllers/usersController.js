@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel'); 
-const sec = require('../sec')
+const sec = require('../sec');
+const crypto = require('crypto-js');
 
 const createUser = async (req, res) => {
     const { uid, mail, name } = req.body;
+
     try{
         const user = await User.create({ uid, mail, name });
         return res.status(200).json(user);
@@ -16,8 +18,11 @@ const getUser = async (req, res) => {
     const uid = req.params.id;
     try{
         const user = await User.findOne({ uid: uid })
-        //console.log(user)
-        res.json(user)
+        const userObj = user.toObject();
+
+        userObj.apiToken = crypto.AES.encrypt(userObj.apiToken, process.env.SEED).toString();
+        //console.log(userObj)
+        res.json(userObj)
     } catch (e) {
         res.json({message: "nefunguje"})
     }
@@ -29,7 +34,8 @@ const createNewUserRating = async (req, res) => {
     const currentDate = new Date();
     const newRatingObj = { text, stars, name, autor, user, date: currentDate, uid }
     
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
 
@@ -43,6 +49,7 @@ const createNewUserRating = async (req, res) => {
         await foundUser.save();
         await me.save();
     
+        await sec.createNewToken(req, res, keyOk);
         res.json(newRatingObj)
             
     }catch(e){
@@ -54,7 +61,8 @@ const createNewUserRating = async (req, res) => {
 const deleteRating = async (req, res) => {
     const { uid, user, autor } = req.body;
 
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
 
@@ -71,6 +79,7 @@ const deleteRating = async (req, res) => {
             { new: true }
         );
 
+        await sec.createNewToken(req, res, keyOk);
         return res.json({ message: 'Rating deleted successfully' });
     } catch (error) {
         console.error('Error deleting rating:', error);

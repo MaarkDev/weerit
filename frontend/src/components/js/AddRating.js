@@ -1,15 +1,20 @@
 import '../css/addrating.css'
+import decryptData from '../../files/sec';
+import KeyContext from '../../context/KeyContext';
+import GetKeyContext from '../../context/GetKeyContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose, faStar, faX } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { faClose, faStar } from '@fortawesome/free-solid-svg-icons';
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import encryptData from '../../files/sec';
 
 const AddRating = ({ setShowAddRating, showAddRating, user, setIsLoading, showRatingsHandler, rerender, setRerender }) => {
     const [stars, setStars] = useState(3);
     const [starsArr, setStarsArr] = useState([])
+
     const { id } = useParams();
+    const { enKey } = useContext(KeyContext);
+    const { getKey, setGetKey } = useContext(GetKeyContext);
 
     useEffect(() => {
         setStarsArr(Array.from({ length: 5 }, (_, index) => index < stars));
@@ -25,30 +30,35 @@ const AddRating = ({ setShowAddRating, showAddRating, user, setIsLoading, showRa
             name: user.name,
             autor: user.uid,
             user: id,
-            uid: uuidv4()
+            uid: uuidv4(),
         }
 
-        await fetch(`${process.env.REACT_APP_API_URL}/api/users/newuserrating`, {
-            method: 'POST',
-            body: JSON.stringify(reviewObj),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
-            }
-        })
-            .then(res => res.json()).then(() => { setIsLoading(false); showRatingsHandler(); setRerender(!rerender) })
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/users/newuserrating`, {
+                method: 'POST',
+                body: JSON.stringify(reviewObj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${decryptData(enKey, process.env.REACT_APP_SEED)}`,
+                    'userId': user.uid
+                }
+            })
+                .then(res => res.json()).then(() => { setIsLoading(false); showRatingsHandler(); setRerender(!rerender); setGetKey(!getKey) })
+        } catch (e) {
+            console.error(e)
+        }
 
     }
 
-    return(
-        <div className='new-rating-page' onClick={() => {setShowAddRating(!showAddRating)}}>
+    return (
+        <div className='new-rating-page' onClick={() => { setShowAddRating(!showAddRating) }}>
             <div className='new-rating-container' onClick={(e) => e.stopPropagation()}>
                 <form className='new-rating-form' onSubmit={submitHandler}>
-                    <span className='inline-rating-form'><p className='new-rating-form-text'>Pridaj hodnotenie</p><FontAwesomeIcon className='new-rating-x' icon={faClose} onClick={() => setShowAddRating(!showAddRating)}/></span>
+                    <span className='inline-rating-form'><p className='new-rating-form-text'>Pridaj hodnotenie</p><FontAwesomeIcon className='new-rating-x' icon={faClose} onClick={() => setShowAddRating(!showAddRating)} /></span>
                     <p className='new-rating-form-input-label'>Hodnotenie<span className='red'>*</span></p>
-                    <textarea className='new-rating-form-input' required/>
+                    <textarea className='new-rating-form-input' required />
                     <p className='new-rating-form-input-label'>Počet hviezd<span className='red'>*</span></p>
-                    <input type='range' defaultValue="3" className='new-rating-form-number' min="1" max="5" required onChange={(e) => {setStars(e.target.value)}}/>
+                    <input type='range' defaultValue="3" className='new-rating-form-number' min="1" max="5" required onChange={(e) => { setStars(e.target.value) }} />
                     <div className='new-rating-form-stars'>
                         {starsArr.map((isGold, index) => (
                             <FontAwesomeIcon
@@ -62,7 +72,7 @@ const AddRating = ({ setShowAddRating, showAddRating, user, setIsLoading, showRa
                 </form>
             </div>
         </div>
-        
+
     )
 }
 

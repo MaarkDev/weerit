@@ -2,9 +2,8 @@ require('dotenv').config();
 const cookieSession = require('cookie-session');
 const cors = require('cors');
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const history = require('express-history-api-fallback');
+const bodyParser = require('body-parser');
 const listingRoutes = require('./routes/listingRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -42,8 +41,6 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
-
-
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

@@ -1,10 +1,10 @@
-import React, { useState, useRef, useContext } from 'react';
 import '../css/filterel.css';
+import DropdownLi from './DropdownLi';
+import FilterContext from '../../context/FilterContext';
+import React, { useState, useRef, useContext } from 'react';
+import { isMobile } from 'react-device-detect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import DropdownLi from './DropdownLi';
-import { isMobile } from 'react-device-detect';
-import FilterContext from '../../context/FilterContext';
 
 const FilterEl = ({
     cardTitle,
@@ -19,11 +19,11 @@ const FilterEl = ({
     setRadius,
     setCoords
 }) => {
-    const [title, setTitle] = useState(cardTitle);
+
     const [ddShown, setDdShown] = useState(false);
-    const parentRef = useRef(null);
     const [query, setQuery] = useState('');
-    const { filter, setFilter } = useContext(FilterContext);
+    const { setFilter } = useContext(FilterContext);
+    const parentRef = useRef(null);
 
     const dropdownClass = () => {
         if (ddShown) {
@@ -48,13 +48,11 @@ const FilterEl = ({
     };
 
     const onPlaceSelected = (place) => {
-        //console.log('Selected Place:', place);
         setFilter((prevFilter) => ({
             ...prevFilter,
             coords: [place.lat, place.lng],
             mesto: place.description
         }));
-        // Handle the selected place, such as retrieving the city or postal code
     };
 
     const handlePlaceSelect = () => {
@@ -63,7 +61,7 @@ const FilterEl = ({
             { input: query, types: ['postal_code'], componentRestrictions: { country: 'sk' } },
             (predictions, status) => {
                 if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-                    const placeId = predictions[0]?.place_id; // Assuming the first prediction is the selected one
+                    const placeId = predictions[0]?.place_id;
                     if (placeId) {
                         const geocoder = new window.google.maps.Geocoder();
                         geocoder.geocode({ placeId }, (results, status) => {
@@ -90,8 +88,8 @@ const FilterEl = ({
     return (
         <div className='filter-el-wrapper' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaverHandler} ref={parentRef}>
             <div className='filter-el' onClick={handleClick}>
-                <p className='filter-el-title'>{title}</p>
-                <FontAwesomeIcon icon={faChevronDown} className='faChevronDown'/>
+                <p className='filter-el-title'>{cardTitle}</p>
+                <FontAwesomeIcon icon={faChevronDown} className='faChevronDown' />
             </div>
             <div className={dropdownClass()}>
                 <div className='dropdown-content'>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import '../css/home.css';
 import photo1 from '../../photos/homebg1.jpg';
 import photo2 from '../../photos/homebg2.jpg';
 import photo3 from '../../photos/homebg3.jpg';
@@ -6,29 +6,27 @@ import photo4 from '../../photos/homebg4.jpg';
 import photo5 from '../../photos/homebg5.jpg';
 import photo6 from '../../photos/homebg6.jpg';
 import photo7 from '../../photos/homebg7.jpg';
-import '../css/home.css';
 import Catalog from "../../components/js/Catalog";
 import Filter from "../../components/js/Filter";
 import FilterContext from "../../context/FilterContext";
 import ListingsContext from "../../context/ListingsContext";
 import QueryContext from "../../context/QueryContext";
 import LoadingPage from "./LoadingPage";
-import AuthContext from "../../context/AuthContext";
 import MoreButton from "../../components/js/MoreButton";
+import { useState, useEffect, useContext } from "react";
 
 const HomePage = () => {
+    const imgArray = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
+
     const [isHovered, setIsHovered] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const imgArray = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
     const [currentPhoto, setCurrentPhoto] = useState(imgArray[currentIndex]);
     const [isFetching, setIsFetching] = useState(false);
-
-    const { filter, setFilter } = useContext(FilterContext);
-    const { listingsContextArr, setListingsContextArr } = useContext(ListingsContext);
-    const { query, setQuery } = useContext(QueryContext);
     const [pageNumber, setPageNumber] = useState(0);
 
-    const { user, setUser } = useContext(AuthContext)
+    const { setFilter } = useContext(FilterContext);
+    const { setListingsContextArr } = useContext(ListingsContext);
+    const { query, setQuery } = useContext(QueryContext);
 
     const fetchAll = async () => {
         const nextPageNumber = pageNumber + 1;
@@ -37,18 +35,22 @@ const HomePage = () => {
             pagenumber: nextPageNumber
         }
         const queryString = new URLSearchParams(qureyObj).toString();
-        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/getlistings?${queryString}`)
-        .then(res => res.json())
-        .then(data => setListingsContextArr(prev => prev.concat(data))).then(() => setIsFetching(false))
+
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/getlistings?${queryString}`)
+                .then(res => res.json())
+                .then(data => setListingsContextArr(prev => prev.concat(data))).then(() => setIsFetching(false))
+        } catch (e) {
+            console.error(e)
+        }
+
     }
 
 
     useEffect(() => {
-        if(isFetching){
+        if (isFetching) {
             fetchAll();
-            //console.log('2')
         }
-        //console.log(isFetching)
     }, [isFetching])
 
 
@@ -72,10 +74,9 @@ const HomePage = () => {
             coords: [0, 0],
         })
 
-        setQuery({...query, searchvalue: ''})
+        setQuery({ ...query, searchvalue: '' })
 
         fetchAll();
-        //console.log('1')
 
         const interval = setInterval(() => {
             setCurrentIndex(prevIndex => {
@@ -131,7 +132,7 @@ const HomePage = () => {
 
             <Filter />
             <Catalog />
-            <MoreButton setIsFetching={setIsFetching}/>
+            <MoreButton setIsFetching={setIsFetching} />
             {isFetching ? <LoadingPage /> : null}
         </div>
     )

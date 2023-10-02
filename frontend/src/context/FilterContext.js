@@ -14,7 +14,7 @@ const FilterContext = createContext({
     vokoli: '',
     psc: '',
     mesto: '',
-    coords: [0, 0],
+    coords: [0, 0]
 });
 
 export default FilterContext;

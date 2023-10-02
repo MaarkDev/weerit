@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { createListing, getListing, getListings, getMyListings, deleteListing,
      searchListings, categorySearch, addFavorite, removeFavorite, getFavorites, reportListing,
-     removeReportedFromCollection, deleteReported, getReported
+     removeReportedFromCollection, deleteReported, getReported, updateListing
 } = require('../controllers/listingsControlles');
 
 router.post('/newlisting', createListing);
@@ -18,5 +18,6 @@ router.post('/report', reportListing);
 router.delete('/deletereported', deleteReported);
 router.delete('/reportedok', removeReportedFromCollection);
 router.get('/getreported', getReported);
+router.put('/updatelisting', updateListing)
 
 module.exports = router;

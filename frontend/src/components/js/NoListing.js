@@ -1,7 +1,7 @@
 import '../css/nolisting.css';
 
 const NoListing = ({ value }) => {
-    return(
+    return (
         <div className='no-listing'>
             <p className='no-listing-text'>{value}</p>
         </div>

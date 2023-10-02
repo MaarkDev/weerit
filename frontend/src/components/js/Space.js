@@ -1,7 +1,7 @@
 import '../css/space.css'
 
 const Space = () => {
-    return(
+    return (
         <div className="space">
 
         </div>

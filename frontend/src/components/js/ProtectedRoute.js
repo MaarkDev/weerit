@@ -1,13 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { Navigate, Route, Outlet } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
+import React, { useContext } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoutes = () => {
     const { user } = useContext(AuthContext);
-    const [isUser, setIsUser] = useState(user)
 
     return (
-        isUser ? <Outlet /> : <Navigate to='/' />
+        user ? <Outlet /> : <Navigate to='/' />
     );
 };
 

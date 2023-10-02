@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
 import '../css/filteractive.css'
 import FilterContext from '../../context/FilterContext';
 import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 export const PriceFilterEl = () => {
     const { filter, setFilter } = useContext(FilterContext);
@@ -13,10 +13,9 @@ export const PriceFilterEl = () => {
             cenaod: '',
             cenado: ''
         }));
-        //console.log(filter)
     }
 
-    return(
+    return (
         <div className='filter-active-el' onClick={deletePrice}>
             <div className="filter-active-text">
                 <p>{`Od ${filter.cenaod}€ Do ${filter.cenado}€`}</p>
@@ -39,10 +38,9 @@ export const PscFilterEl = () => {
             coords: [0, 0],
             mesto: ''
         }));
-        //console.log(filter)
     }
 
-    return(
+    return (
         <div className='filter-active-el' onClick={deleteLocation}>
             <div className="filter-active-text">
                 <p>{`PSČ: ${filter.mesto}`}</p>
@@ -62,10 +60,9 @@ export const RadiusFilterEl = () => {
             ...prevFilter,
             vokoli: '10'
         }));
-        //console.log(filter)
     }
 
-    return(
+    return (
         <div className='filter-active-el' onClick={deleteLocation}>
             <div className="filter-active-text">
                 <p>{`V okolí ${filter.vokoli}km`}</p>
@@ -85,10 +82,9 @@ export const SizeFilterEl = () => {
             ...prevFilter,
             velkostIna: ''
         }));
-        //console.log(filter)
     }
 
-    return(
+    return (
         <div className='filter-active-el' onClick={deleteSize}>
             <div className="filter-active-text">
                 <p>{`${filter.velkostIna}`}</p>
@@ -108,10 +104,9 @@ export const BrandFilterEl = () => {
             ...prevFilter,
             znackaIna: ''
         }));
-        //console.log(filter)
     }
 
-    return(
+    return (
         <div className='filter-active-el' onClick={deleteBrand}>
             <div className="filter-active-text">
                 <p>{`${filter.znackaIna}`}</p>

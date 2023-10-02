@@ -1,10 +1,9 @@
 import '../css/footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookSquare, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
-    return(
+    return (
         <div className='outer-footer'>
             <div className='footer-contact'>
                 <p><b>Kontakt</b></p>
@@ -14,7 +13,7 @@ const Footer = () => {
             <div className='footer-socials'>
                 <FontAwesomeIcon icon={faInstagram} />
             </div>
-            
+
             <div className='footer-about'>
                 <p><b>Weerit.sk</b></p>
                 <p>Weerit je projekt, ktorý mňa ako 18 ročného programátora mal skutočne otestovať a uceliť všetko čo som sa o full stack web developmente naučil {'(MERN)'}, tak teda dúfam, že sa ti to tu páči :{')'}</p>

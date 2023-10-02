@@ -55,6 +55,8 @@
     margin-top: 1.2rem;
     font-size: 3.6rem;
     font-weight: bold;
+
+
 }
 
 .product-add-to-favs{
@@ -73,12 +75,12 @@
 }
 
 .product-add-to-favs:hover{
-    color: rgb(217, 188, 26);
+    color: gold;
     cursor: pointer;
 }
 
 .gold{
-    color: rgb(217, 188, 26);
+    color: gold !important;
 }
 
 .product-add-to-favs > p{

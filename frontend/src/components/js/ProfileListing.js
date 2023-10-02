@@ -1,8 +1,16 @@
 import '../css/profilelisting.css';
+import decryptData from '../../files/sec';
+import KeyContext from '../../context/KeyContext';
+import GetKeyContext from '../../context/GetKeyContext';
+import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import encryptData from '../../files/sec';
+import { useContext } from 'react';
 
-const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings, fotky }) => {
+const ProfileListing = ({ title, price, src, uid, setIsLoading, getMyListings, fotky }) => {
+    const { getKey, setGetKey } = useContext(GetKeyContext);
+    const { enKey } = useContext(KeyContext);
+    const { user } = useContext(AuthContext);
+
     const navigate = useNavigate()
 
     const clickHandler = () => {
@@ -11,17 +19,22 @@ const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMy
 
     const deleteHandler = async () => {
         setIsLoading(true)
-        //console.log("to delete: " + uid)
-        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/deletelisting`, {
-            method: "DELETE",
-            body: JSON.stringify({ uid: uid, fotky: fotky }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
-            }
-        }).then(() => {
-            getMyListings().then(() => setIsLoading(false));
-        })
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/deletelisting`, {
+                method: "DELETE",
+                body: JSON.stringify({ uid: uid, fotky: fotky }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${decryptData(enKey, process.env.REACT_APP_SEED)}`,
+                    'userId': user.uid
+                }
+            }).then(() => {
+                getMyListings().then(() => { setIsLoading(false); setGetKey(!getKey) });
+            })
+        } catch (e) {
+            console.error(e)
+        }
+
     }
 
     return (
@@ -36,6 +49,9 @@ const ProfileListing = ({ title, price, src, uid, isLoading, setIsLoading, getMy
                 </div>
                 <div className='profile-listing-delete-button' onClick={deleteHandler}>
                     <p className='profile-listing-delete-button-text'>Vymaž</p>
+                </div>
+                <div className='profile-listing-delete-button bg-black' onClick={() => { navigate(`/editlisting/${uid}`)}}>
+                    <p className='profile-listing-delete-button-text'>Uprav</p>
                 </div>
             </div>
 

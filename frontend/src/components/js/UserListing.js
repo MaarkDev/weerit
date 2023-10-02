@@ -1,7 +1,7 @@
 import '../css/profilelisting.css';
 import { useNavigate } from 'react-router-dom';
 
-const UserListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings }) => {
+const UserListing = ({ title, price, src, uid }) => {
     const navigate = useNavigate()
 
     const clickHandler = () => {

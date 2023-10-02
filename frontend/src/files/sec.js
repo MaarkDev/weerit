@@ -1,8 +1,8 @@
 const CryptoJS = require('crypto-js');
 
-function encryptData(KEY, SEED) {
-    const encrypted = CryptoJS.AES.encrypt(KEY, SEED).toString();
-    return encrypted;
+function decryptData(KEY, SEED) {
+    const decrypted = CryptoJS.AES.decrypt(KEY, SEED).toString(CryptoJS.enc.Utf8);
+    return decrypted;
 }
 
-export default encryptData;
+export default decryptData;

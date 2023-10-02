@@ -1,8 +1,14 @@
 import '../css/profilelisting.css';
+import decryptData from '../../files/sec';
+import KeyContext from '../../context/KeyContext';
+import GetKeyContext from '../../context/GetKeyContext';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import encryptData from '../../files/sec';
 
-const FavoriteListing = ({ title, price, src, uid, isLoading, setIsLoading, getMyListings, user }) => {
+const FavoriteListing = ({ title, price, src, uid, setIsLoading, getMyListings, user }) => {
+    const { enKey } = useContext(KeyContext);
+    const { getKey, setGetKey } = useContext(GetKeyContext);
+
     const navigate = useNavigate()
 
     const clickHandler = () => {
@@ -11,19 +17,25 @@ const FavoriteListing = ({ title, price, src, uid, isLoading, setIsLoading, getM
 
     const removeFromFavorites = async () => {
         setIsLoading(true)
-        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/removefavorite`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${encryptData(process.env.REACT_APP_KEY, process.env.REACT_APP_SEED)}` 
-            },
-            body: JSON.stringify({
-                uid: user.uid,
-                favoriteIdToRemove: uid
-            }),
-        }).then(() => {
-            getMyListings().then(() => setIsLoading(false));
-        })
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/removefavorite`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${decryptData(enKey, process.env.REACT_APP_SEED)}`,
+                    'userId': user.uid
+                },
+                body: JSON.stringify({
+                    uid: user.uid,
+                    favoriteIdToRemove: uid
+                }),
+            }).then(() => {
+                getMyListings().then(() => { setIsLoading(false); setGetKey(!getKey) });
+            })
+        } catch (e) {
+            console.error(e)
+        }
+
     }
 
     return (

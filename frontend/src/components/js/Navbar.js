@@ -1,18 +1,17 @@
 import '../css/navbar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faUserCircle, faSearch, faPlusCircle, faCog } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState, useRef, useContext } from 'react';
-import { isMobile } from 'react-device-detect';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import LoginWidget from './LoginWidget';
 import AuthContext from '../../context/AuthContext';
 import QueryContext from '../../context/QueryContext';
 import ListingsContext from '../../context/ListingsContext';
 import FilterContext from '../../context/FilterContext';
 import PageNumberContext from '../../context/PageNumberContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faEnvelope, faUserCircle, faSearch, faPlusCircle, faCog } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState, useRef, useContext } from 'react';
+import { isMobile } from 'react-device-detect';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
-    const { user, setUser } = useContext(AuthContext)
     const [dbUser, setDbUser] = useState({});
     const [menuShown, setMenuShown] = useState(false);
     const [burgerIconClass, setBurgerIconClass] = useState('nav-hamburger-container');
@@ -20,23 +19,21 @@ export default function Navbar() {
     const [infoClass, setInfoClass] = useState('nav-inner-info');
     const [isScrolled, setIsScrolled] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
-
     const [mainClass, setMainClass] = useState('nav-inner-main');
     const [isAnimating, setIsAnimating] = useState(false);
-    const location = useLocation();
-
     const [showLoginWidget, setShowLoginWidget] = useState(false);
-    const navigate = useNavigate();
 
     const { query, setQuery } = useContext(QueryContext);
-    const { filter, setFilter } = useContext(FilterContext);
-    const { listingsContextArr, setListingsContextArr } = useContext(ListingsContext);
-    const { qPageNumber, setQPageNumber } = useContext(PageNumberContext);
+    const { filter } = useContext(FilterContext);
+    const { setListingsContextArr } = useContext(ListingsContext);
+    const { setQPageNumber } = useContext(PageNumberContext);
+    const { user } = useContext(AuthContext)
 
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         resetPage();
-        //console.log(user)
     }, [location.pathname]);
 
     const handleShowMenu = () => {
@@ -71,9 +68,9 @@ export default function Navbar() {
                 setTimeout(() => {
                     setIsAnimating(false);
                 }, 300);
-                //console.log('down', currentScrollPos)
             }
         }
+
         if (currentScrollPos < prevScrollPos && !isAnimating) {
             setIsScrolled(false);
             if (isMobile && currentScrollPos) {
@@ -82,7 +79,6 @@ export default function Navbar() {
                 setTimeout(() => {
                     setIsAnimating(false);
                 }, 300);
-                //console.log('up', currentScrollPos)
             }
         }
 
@@ -90,7 +86,6 @@ export default function Navbar() {
     };
 
     useEffect(() => {
-
         handleScroll();
         window.addEventListener('scroll', handleScroll);
 
@@ -100,14 +95,11 @@ export default function Navbar() {
     }, [prevScrollPos]);
 
     const resetPage = () => {
-        //setMenuShown(false);
-        //handleShowMenu();
         setMenuShown(false);
         setBurgerIconClass('nav-hamburger-container')
         setMainClass('nav-inner-main');
         setDropdownClass('nav-inner-categories hamburger-menu');
         document.body.style.overflow = '';
-        //handleScroll();
         window.scrollTo(0, 0);
     }
 
@@ -135,25 +127,26 @@ export default function Navbar() {
         };
 
         setQuery(updatedQuery)
-        //console.log("Q: ", updatedQuery) ===OK===
-
         const queryString = new URLSearchParams(updatedQuery).toString();
 
-
-        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
-            .then(res => res.json())
-            .then(data => { setListingsContextArr(data); setQPageNumber(1) })
-            .then(() => navigate(`/browse/${queryString}`));
-    }
-
-    const resetListingsArr = () => {
-        //setListingsContextArr([]);
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
+                .then(res => res.json())
+                .then(data => { setListingsContextArr(data); setQPageNumber(1) })
+                .then(() => navigate(`/browse/${queryString}`));
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     const getDbUser = async () => {
-        await fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${user.uid}`)
-        .then((data) => data.json())
-        .then((user) => {setDbUser(user)})
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/users/getuser/${user.uid}`)
+                .then((data) => data.json())
+                .then((user) => { setDbUser(user) })
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     useEffect(() => {
@@ -222,8 +215,8 @@ export default function Navbar() {
                                     <FontAwesomeIcon icon={faUserCircle} /><p><NavLink to='/myprofile' className=''>Môj profil</NavLink></p>
                                 </div>
                                 {
-                                    dbUser.admin === true ? 
-                                        <div className='nav-inner-info-right mail-icon nav-add-btn2 dashboard' > 
+                                    dbUser.admin === true ?
+                                        <div className='nav-inner-info-right mail-icon nav-add-btn2 dashboard' >
                                             <FontAwesomeIcon icon={faCog} /><p><NavLink to='/secret/adminuser' className=''>Dashboard</NavLink></p>
                                         </div>
                                         :
@@ -243,9 +236,7 @@ export default function Navbar() {
                             <input type='text' placeholder='Sem napíšte, čo hľadáte...' value={query.searchvalue} onChange={(e) => {
                                 setQuery({ ...query, searchvalue: e.target.value });
                             }}></input>
-                            {/*<div className='nav-inner-main-search-form-submit'>
-                                <FontAwesomeIcon icon={faSearch} className='nav-inner-main-search-form-submit-icon' onSubmit={submitHandler}/>
-                        </div>*/}
+
                             <button type='submit' className='nav-inner-main-search-form-submit'>
                                 <FontAwesomeIcon icon={faSearch} className='nav-inner-main-search-form-submit-icon' />
                             </button>
@@ -253,12 +244,12 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className={dropdownClass}>
-                    <NavLink to='/' onClick={resetListingsArr}>Domov</NavLink>
-                    <NavLink to='/browse/shoes' onClick={resetListingsArr}>Topánky</NavLink>
-                    <NavLink to='/browse/hoodies' onClick={resetListingsArr}>Mikiny</NavLink>
-                    <NavLink to='/browse/pants' onClick={resetListingsArr}>Nohavice</NavLink>
-                    <NavLink to='/browse/accessories' onClick={resetListingsArr}>Doplnky</NavLink>
-                    <NavLink to='/browse/underwear' onClick={resetListingsArr}>Prádlo</NavLink>
+                    <NavLink to='/'>Domov</NavLink>
+                    <NavLink to='/browse/shoes'>Topánky</NavLink>
+                    <NavLink to='/browse/hoodies'>Mikiny</NavLink>
+                    <NavLink to='/browse/pants'>Nohavice</NavLink>
+                    <NavLink to='/browse/accessories'>Doplnky</NavLink>
+                    <NavLink to='/browse/underwear'>Prádlo</NavLink>
                 </div>
             </div>
         </div>

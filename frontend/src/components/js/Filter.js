@@ -1,14 +1,14 @@
 import '../css/filter.css';
 import FilterEl from './FilterEl';
 import FilterActive from './FilterActive';
-import { useContext, useEffect, useState } from 'react';
 import FilterContext from '../../context/FilterContext';
 import QueryContext from '../../context/QueryContext';
 import ListingsContext from '../../context/ListingsContext';
 import FilterButton from './FilterButton';
-import { PriceFilterEl, LocationFilterEl, SizeFilterEl, BrandFilterEl, PscFilterEl, RadiusFilterEl } from './CustomFilterEl';
-import { useNavigate } from 'react-router-dom';
 import PageNumberContext from '../../context/PageNumberContext';
+import { PriceFilterEl, SizeFilterEl, BrandFilterEl, PscFilterEl, RadiusFilterEl } from './CustomFilterEl';
+import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
 const Filter = () => {
     const categoryValues = ['Tričká', 'Mikiny', 'Topánky', 'Nohavice', 'Doplnky', 'Spodné prádlo', 'Plavky'];
@@ -18,13 +18,13 @@ const Filter = () => {
     const sortValues = ['Od najdrahšieho', 'Od najlacnejšieho', 'Od najnovšieho', 'Od najstaršieho'];
     const forValues = ['Muža', 'Ženu', 'Dieťa', 'Unisex']
 
-    const { filter, setFilter } = useContext(FilterContext);
-    const { query, setQuery } = useContext(QueryContext);
-    const { listingsContextArr, setListingsContextArr } = useContext(ListingsContext)
     const [indexes, setIndexes] = useState([]);
     const [filterElements, setFitlerElements] = useState([]);
 
-    const { qPageNumber, setQPageNumber } = useContext(PageNumberContext);
+    const { filter, setFilter } = useContext(FilterContext);
+    const { query } = useContext(QueryContext);
+    const { setListingsContextArr } = useContext(ListingsContext)
+    const { setQPageNumber } = useContext(PageNumberContext);
 
     const navigate = useNavigate();
 
@@ -66,20 +66,19 @@ const Filter = () => {
                     if (index !== -1) {
                         values = [...values.slice(0, index), ...values.slice(index + 1)];
                     }
-                } 
+                }
 
-                if(newValue == 'odnajlacnejsieho' 
-                || newValue == 'odnajdrahsieho' 
-                || newValue == 'odnajnovsieho'
-                || newValue == 'odnajstarsieho'){
+                if (newValue == 'odnajlacnejsieho'
+                    || newValue == 'odnajdrahsieho'
+                    || newValue == 'odnajnovsieho'
+                    || newValue == 'odnajstarsieho') {
                     updatedFilter.zoradit = '';
                 }
-                
 
                 updatedFilter[key] = values;
             });
             return updatedFilter;
-            
+
         });
     };
 
@@ -99,7 +98,6 @@ const Filter = () => {
         const elements = activeFilterIndexes.map(index => helperArray[index]);
         setIndexes(activeFilterIndexes);
         setFitlerElements(elements);
-        //console.log(filter)
 
     }, [filter]);
 
@@ -197,7 +195,7 @@ const Filter = () => {
             vokoli: newValue
         }));
     }
-    
+
     const setCoords = (e) => {
         setFilter((prevFilter) => ({
             ...prevFilter,
@@ -207,7 +205,6 @@ const Filter = () => {
     }
 
     const submitHandler = async () => {
-        console.log("FILTER")
         setListingsContextArr([]);
         const updatedQuery = {
             searchvalue: (query.searchvalue || ''),
@@ -229,10 +226,15 @@ const Filter = () => {
         };
         const queryString = new URLSearchParams(updatedQuery).toString();
 
-        await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
-            .then(res => res.json())
-            .then(data => { setListingsContextArr(data); setQPageNumber(1) })
-            .then(navigate(`/browse/${queryString}`));
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/listings/search?${queryString}`)
+                .then(res => res.json())
+                .then(data => { setListingsContextArr(data); setQPageNumber(1) })
+                .then(navigate(`/browse/${queryString}`));
+        } catch (e) {
+            console.error(e)
+        }
+
     }
 
     return (
@@ -245,7 +247,7 @@ const Filter = () => {
                 <FilterEl cardTitle='Cena' unique='price' addFilter={addFilter} setCenaOd={setCenaOd} setCenaDo={setCenaDo} />
                 <FilterEl cardTitle='Zoradiť' valuesArr={sortValues} addFilter={addFilter} />
                 <FilterEl cardTitle='Pre koho' valuesArr={forValues} addFilter={addFilter} />
-                <FilterEl cardTitle='V okolí' unique='radius' addFilter={addFilter} setPSC={setPSC} setRadius={setRadius} setCoords={setCoords}/>
+                <FilterEl cardTitle='V okolí' unique='radius' addFilter={addFilter} setPSC={setPSC} setRadius={setRadius} setCoords={setCoords} />
             </div>
             <div className='active-filters-container'>
                 {filter.cenaod !== '' || filter.cenado !== '' ? <PriceFilterEl /> : <></>}
@@ -254,16 +256,16 @@ const Filter = () => {
                 {filter.velkostIna !== '' ? <SizeFilterEl /> : <></>}
                 {filter.znackaIna !== '' ? <BrandFilterEl /> : <></>}
                 {filterElements.map((item) => <FilterActive value={item} removeValueFromFilter={removeValueFromFilter} />)}
-                {indexes.length !== 0 
-                || filter.cenaod !== ''
-                || filter.cenado !== ''
-                || filter.psc !== ''
-                || filter.vokoli !== ''
-                || filter.velkostIna !== ''
-                || filter.znackaIna !== ''
-                ? <FilterButton submitHandler={submitHandler}/> : <></>}
+                {indexes.length !== 0
+                    || filter.cenaod !== ''
+                    || filter.cenado !== ''
+                    || filter.psc !== ''
+                    || filter.vokoli !== ''
+                    || filter.velkostIna !== ''
+                    || filter.znackaIna !== ''
+                    ? <FilterButton submitHandler={submitHandler} /> : <></>}
             </div>
-            
+
         </>
     )
 }
