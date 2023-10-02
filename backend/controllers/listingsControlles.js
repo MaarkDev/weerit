@@ -19,7 +19,8 @@ const createListing = async (req, res) => {
 
     let url_array = [];
 
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
 
@@ -51,6 +52,59 @@ const createListing = async (req, res) => {
                 coordinates: [lng, lat]
             }
         })
+        await sec.createNewToken(req, res, keyOk);
+        return res.status(200).json(listing);
+    } catch (e) {
+        console.log(e)
+    }
+
+};
+
+const updateListing = async (req, res) => {
+    const { autor, uid, nazov, popis, kategoria, znacka, velkost,
+        farba, prekoho, psc, telefon, mail, igfb, cena, fotky, mesto, lat, lng } = req.body;
+
+    let url_array = [];
+
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
+        return res.status(400).json({ message: 'Forbidden' });
+    }
+
+    try {
+        if(!fotky[0].startsWith("http://")){
+            for (let i = 0; i < fotky.length; i++) {
+                const result = await cloudinary.uploader.upload(fotky[i]);
+                url_array.push(result.url);
+            }
+        }else{
+            url_array = [...fotky]
+        }
+        
+
+        const listing = await Listing.findOneAndUpdate({ uid: uid }, {
+            autor: autor,
+            uid: uid,
+            nazov: nazov,
+            popis: popis,
+            kategoria: kategoria,
+            znacka: znacka,
+            velkost: velkost,
+            farba: farba,
+            prekoho: prekoho,
+            psc: psc,
+            telefon: telefon,
+            mail: mail,
+            igfb: igfb,
+            cena: cena,
+            fotky: url_array,
+            mesto: mesto,
+            location: {
+                type: 'Point',
+                coordinates: [lng, lat]
+            }
+        })
+        await sec.createNewToken(req, res, keyOk);
         return res.status(200).json(listing);
     } catch (e) {
         console.log(e)
@@ -62,7 +116,7 @@ const getListings = async (req, res) => {
     const query = req.query
     const pageNumber = req.query.pagenumber;
     const pageSize = 20;
-    console.log("PAGENUMBER: " + query.pagenumber)
+    //console.log("PAGENUMBER: " + query.pagenumber)
     const listings = await Listing.find({}).sort({ createdAt: -1 }).skip((pageNumber - 1) * pageSize).limit(pageSize).exec();
     return res.status(200).json(listings);
 };
@@ -80,7 +134,8 @@ const getMyListings = async (req, res) => {
 const deleteListing = async (req, res) => {
     const fotky = req.body.fotky;
 
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
 
@@ -90,10 +145,27 @@ const deleteListing = async (req, res) => {
         const dotIndex = last_part.indexOf('.');
         const public_id = last_part.substring(0, dotIndex);
         //console.log(public_id)
-        await cloudinary.uploader.destroy(public_id, function(result) { console.log("image deleted") });
+        await cloudinary.uploader.destroy(public_id, function(result) { });
     }
     const deletedListing = await Listing.findOneAndDelete({ uid: req.body.uid });
+    await sec.createNewToken(req, res, keyOk);
     return res.status(200).json(deletedListing); 
+}
+
+const deleteImage = async (req, res) => {
+    const fotka = req.body.fotka;
+    const urlParts = fotka.split('/');
+    const last_part = urlParts.pop();
+    const dotIndex = last_part.indexOf('.');
+    const public_id = last_part.substring(0, dotIndex);
+
+    await Listing.findOneAndUpdate(
+        { uid: req.body.uid }, 
+        { $pull: { fotky: { fotka } } },
+        { new: true } 
+    );
+
+    await cloudinary.uploader.destroy(public_id, function(result) { });
 }
 
 const searchListings = async (req, res) => {
@@ -159,7 +231,7 @@ const searchListings = async (req, res) => {
 
     try {
         await Listing.createIndexes({ nazov: "text" });
-        console.log("PAGENUMBERQUERY: " + pageNumber)
+        //console.log("PAGENUMBERQUERY: " + pageNumber)
 
         if(query.zoradit == 'odnajnovsieho' || query.zoradit == ''){
             const listings = await Listing.find(queryFilter).sort({ createdAt: -1 }).skip((pageNumber - 1) * pageSize).limit(pageSize).exec();
@@ -181,16 +253,17 @@ const searchListings = async (req, res) => {
        
         
     } catch (e) {
-        res.status(500).json({ error: "Internal server error" })
+        res.status(500).json({ error: e })
     }
 }
+
 
 
 const categorySearch = async (req, res) => {
     const query = req.query
     const pageNumber = req.query.pagenumber;
     const pageSize = 20;
-    console.log(pageNumber)
+    //console.log(pageNumber)
     try {
         const category = req.query.kategoria;
         const listings = await Listing.find({ kategoria: category }).skip((pageNumber - 1) * pageSize).limit(pageSize).exec();
@@ -201,7 +274,8 @@ const categorySearch = async (req, res) => {
 };
 
 const addFavorite = async (req, res) => {
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
     
@@ -213,6 +287,7 @@ const addFavorite = async (req, res) => {
             { $push: { favorites: newFavoriteId } },
             { new: true }
         );
+        await sec.createNewToken(req, res, keyOk);
         res.json(user);
     } catch (error) {
         res.json(error);
@@ -223,7 +298,8 @@ const removeFavorite = async (req, res) => {
     const uid = req.body.uid;
     const favoriteIdToRemove = req.body.favoriteIdToRemove;
 
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
 
@@ -233,6 +309,7 @@ const removeFavorite = async (req, res) => {
             { $pull: { favorites: favoriteIdToRemove } },
             { new: true }
         );
+        await sec.createNewToken(req, res, keyOk);
         res.json(user);
     } catch (error) {
         res.json(error);
@@ -275,19 +352,23 @@ const reportListing = async (req, res) => {
 }
 
 const deleteReported = async (req, res) => {
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
     const removedFromCollection = await Reported.findOneAndDelete({ uid: req.body.uid });
     const deleted = await Listing.findOneAndDelete({ uid: req.body.uid });
+    await sec.createNewToken(req, res, keyOk);
     res.json(deleted)
 }
 
 const removeReportedFromCollection = async (req, res) => {
-    if(!sec.checkKey(req, res)){
+    const keyOk = await sec.checkKey(req, res);
+    if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
     const removedFromCollection = await Reported.findOneAndDelete({ uid: req.body.uid });
+    await sec.createNewToken(req, res, keyOk);
     res.json(removedFromCollection)
 }
 
@@ -311,5 +392,6 @@ module.exports = {
     reportListing,
     deleteReported,
     removeReportedFromCollection,
-    getReported
+    getReported,
+    updateListing
 }
