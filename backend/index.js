@@ -14,7 +14,7 @@ const passport = require('passport')
 const passportCfg = require('./passport')
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.FRONTEND_URL_NOWWW],
+  origin: '*',
   methods: 'GET,POST,PUT,DELETE,PATCH',
   credentials: true
 }));
