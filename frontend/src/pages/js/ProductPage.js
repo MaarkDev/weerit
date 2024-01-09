@@ -32,7 +32,7 @@ const ProductPage = () => {
 
     const { filter } = useContext(FilterContext);
     const { query } = useContext(QueryContext);
-    const { setListingsContextArr } = useContext(ListingsContext);
+    const { setListingsContextArr, listingsContextArr } = useContext(ListingsContext);
     const { user } = useContext(AuthContext);
     const { setQPageNumber } = useContext(PageNumberContext);
     const { enKey } = useContext(KeyContext);
@@ -259,7 +259,11 @@ const ProductPage = () => {
                 <Filter />
                 <Catalog />
             </div>
-            <MoreButton setIsFetching={setIsFetching} />
+            
+            {
+                listingsContextArr.length > 18 ? <MoreButton setIsFetching={setIsFetching} /> : null
+            }
+            
             {isLoading ? <LoadingPage /> : <></>}
             {isFetching ? <LoadingPage /> : <></>}
 

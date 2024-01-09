@@ -15,8 +15,8 @@ const Listing = ({ title, source, place, price, uid }) => {
                 </div>
 
                 <div className='listing-price'>
-                    <p>{place}</p>
                     <p>{price}€</p>
+                    <p>{place}</p>
                 </div>
             </div>
 

@@ -62,7 +62,7 @@ export default function Navbar() {
 
         if (currentScrollPos > prevScrollPos && !isAnimating) {
             setIsScrolled(true);
-            if (isMobile && currentScrollPos) {
+            if (currentScrollPos) { //TU PRIDAJ ISMOBILE && AK SA NIECO POKAZILA
                 setMainClass('nav-inner-main shrink');
                 setIsAnimating(true);
                 setTimeout(() => {
@@ -73,7 +73,7 @@ export default function Navbar() {
 
         if (currentScrollPos < prevScrollPos && !isAnimating) {
             setIsScrolled(false);
-            if (isMobile && currentScrollPos) {
+            if (currentScrollPos) { //TU PRIDAJ ISMOBILE && AK SA NIECO POKAZILA
                 setMainClass('nav-inner-main expand');
                 setIsAnimating(true);
                 setTimeout(() => {
@@ -152,6 +152,12 @@ export default function Navbar() {
     useEffect(() => {
         getDbUser();
     }, [user])
+
+    const clearListings = (path) => {
+        if(path != window.location.pathname){
+            setListingsContextArr([]);
+        }
+    } 
 
     return (
         <div className="nav-outer">
@@ -244,12 +250,12 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className={dropdownClass}>
-                    <NavLink to='/'>Domov</NavLink>
-                    <NavLink to='/browse/shoes'>Topánky</NavLink>
-                    <NavLink to='/browse/hoodies'>Mikiny</NavLink>
-                    <NavLink to='/browse/pants'>Nohavice</NavLink>
-                    <NavLink to='/browse/accessories'>Doplnky</NavLink>
-                    <NavLink to='/browse/underwear'>Prádlo</NavLink>
+                    <NavLink to='/' onClick={() => clearListings('/')}>Domov</NavLink>
+                    <NavLink to='/browse/shoes' onClick={() => clearListings('/browse/shoes')}>Topánky</NavLink>
+                    <NavLink to='/browse/hoodies' onClick={() => clearListings('/browse/hoodies')}>Mikiny</NavLink>
+                    <NavLink to='/browse/pants' onClick={() => clearListings('/browse/pants')}>Nohavice</NavLink>
+                    <NavLink to='/browse/accessories' onClick={() => clearListings('/browse/accessories')}>Doplnky</NavLink>
+                    <NavLink to='/browse/underwear' onClick={() => clearListings('/browse/underwear')}>Prádlo</NavLink>
                 </div>
             </div>
         </div>

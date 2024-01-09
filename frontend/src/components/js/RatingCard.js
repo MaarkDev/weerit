@@ -13,6 +13,24 @@ const RatingCard = ({ text, ratedUser, date, stars, name, autor, uid, rerender, 
     const { user } = useContext(AuthContext);
     const userId = user?.uid || '';
 
+    const reportRating = async () => {
+        setIsLoading(true);
+        const reportedObj = { user: ratedUser, autor: autor, stars: stars, name: name, uid: uid, text: text };
+        try {
+            await fetch(`${process.env.REACT_APP_API_URL}/api/users/reportrating`, {
+                method: 'POST',
+                body: JSON.stringify(reportedObj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${decryptData(enKey, process.env.REACT_APP_SEED)}`,
+                    'userId': user.uid
+                }
+            }).then(() => setIsLoading(false))
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     const renderStars = () => {
         const starsArray = Array.from({ length: 5 }, (_, index) => index < stars);
         return starsArray.map((isGold, index) => (
@@ -67,7 +85,11 @@ const RatingCard = ({ text, ratedUser, date, stars, name, autor, uid, rerender, 
             </div>
 
             <div className='rating-card-date inline-rating'>
-                <p>{formatDate()}</p>{userId == autor ? <p className='rating-card-delete' onClick={deleteRating}>Vymazať</p> : null}
+                <p>{formatDate()}</p>
+                <div className='buttons-together inline-rating'>
+                    <p className='rating-card-delete' onClick={reportRating}>Nahlásiť</p>
+                    {userId == autor ? <p className='rating-card-delete' onClick={deleteRating}>Vymazať</p> : null}
+                </div>
             </div>
         </div>
     )

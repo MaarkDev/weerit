@@ -45,6 +45,7 @@ const BrowsePage = () => {
 
     }
 
+
     const queryHandler = async () => {
         const nextPageNumber = qPageNumber + 1;
         setQPageNumber(prev => prev + 1)
@@ -126,6 +127,7 @@ const BrowsePage = () => {
         }
 
         const redirectHandler = async () => {
+            setListingsContextArr([]);
             setPageNumber(1)
             const updatedQuery = {
                 kategoria: [currentKategoria],
@@ -228,10 +230,13 @@ const BrowsePage = () => {
             {typeof currentQ === 'string' && currentQ != '' ? <h2 className="browse-page-res-text">{`Výsledky pre hľadaný výraz: "${currentQ}"`}</h2> : <></>}
 
             {
-                listingsContextArr.length != 0 ? <><Catalog /><MoreButton setIsFetching={setIsFetching} /></> :
+                listingsContextArr.length != 0 ? <Catalog /> :
                     <div className="browse-page-no-search">
                         <NoListing value="Pre hľadaný výraz sa nenašli žiadne inzeráty" />
                     </div>
+            }
+            {
+                listingsContextArr.length > 18 ? <MoreButton setIsFetching={setIsFetching} /> : null
             }
             {isFetching ? <LoadingPage /> : null}
         </div>

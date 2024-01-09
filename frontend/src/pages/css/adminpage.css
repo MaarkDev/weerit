@@ -21,3 +21,45 @@
     font-size: 4.8rem;
     margin: 0;
 }
+
+.admin-page-reported-selection{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.4rem;
+    gap: 2.4rem;
+}
+
+.admin-page-title2{
+    padding: 0;
+    margin: 0;
+    font-size: 2.4rem;
+    cursor: pointer;
+}
+
+.unselected{
+    color: gray;
+}
+
+.rep-users-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .rep-users-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .rep-users-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .rep-users-grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

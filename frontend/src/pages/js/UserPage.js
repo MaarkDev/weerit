@@ -5,9 +5,11 @@ import LoadingPage from './LoadingPage';
 import UserListing from '../../components/js/UserListing';
 import AddRating from '../../components/js/AddRating';
 import RatingCard from '../../components/js/RatingCard';
+import ReportUserForm from '../../components/js/ReportUserForm';
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 const UserPage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -17,6 +19,7 @@ const UserPage = () => {
     const [visitedUser, setVisitedUser] = useState({})
     const [visitedUserListings, setVisitedUserListings] = useState([])
     const [rerender, setRerender] = useState(false);
+    const [showReport, setShowReport] = useState(false);
 
     const { user } = useContext(AuthContext)
     const { id } = useParams();
@@ -62,13 +65,22 @@ const UserPage = () => {
                     <p className={favHeadingClass} onClick={showRatingsHandler}>Hodnotenia</p>
                 </div>
 
+                <div className='inline-buttons'>
+
+                
+
                 {
                     user ? <div className='logout-button rating-button' onClick={() => setShowAddRating(true)}>
-                        <p className='logout-button-text'>Ohodnotiť používatela</p>
+                        <p className='logout-button-text'>Ohodnotiť používateľa</p>
                     </div>
                         : <></>
                 }
 
+                <div className='logout-button' onClick={() => setShowReport(true)}>
+                    <p className='logout-button-text'>Nahlásiť používateľa</p>
+                </div>
+
+                </div>
 
                 {!showRatings ?
                     visitedUserListings.length !== 0 ?
@@ -94,6 +106,7 @@ const UserPage = () => {
             </div>
             {isLoading ? <LoadingPage /> : null}
             {showAddRating ? <AddRating rerender={rerender} setRerender={setRerender} showRatingsHandler={showRatingsHandler} setIsLoading={setIsLoading} setShowAddRating={setShowAddRating} showAddRating={showAddRating} user={user} /> : null}
+            {showReport ? <ReportUserForm setShowReport={setShowReport} setIsLoading={setIsLoading} visitedUser={visitedUser} id={id} user={user} /> : null}
         </div>
     )
 }

@@ -148,6 +148,7 @@ const deleteListing = async (req, res) => {
         await cloudinary.uploader.destroy(public_id, function(result) { });
     }
     const deletedListing = await Listing.findOneAndDelete({ uid: req.body.uid });
+    const deleteFromRep = await Reported.deleteMany({ uid: req.body.uid })
     await sec.createNewToken(req, res, keyOk);
     return res.status(200).json(deletedListing); 
 }
@@ -356,7 +357,7 @@ const deleteReported = async (req, res) => {
     if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
-    const removedFromCollection = await Reported.findOneAndDelete({ uid: req.body.uid });
+    const removedFromCollection = await Reported.deleteMany({ uid: req.body.uid });
     const deleted = await Listing.findOneAndDelete({ uid: req.body.uid });
     await sec.createNewToken(req, res, keyOk);
     res.json(deleted)
@@ -367,7 +368,7 @@ const removeReportedFromCollection = async (req, res) => {
     if(!keyOk){
         return res.status(400).json({ message: 'Forbidden' });
     }
-    const removedFromCollection = await Reported.findOneAndDelete({ uid: req.body.uid });
+    const removedFromCollection = await Reported.deleteMany({ uid: req.body.uid });
     await sec.createNewToken(req, res, keyOk);
     res.json(removedFromCollection)
 }

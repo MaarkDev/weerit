@@ -1,6 +1,7 @@
 .listing-container{
     width: 100%;
     height: fit-content;
+    min-height: 24.4rem;
     background-color: rgb(240, 240, 240);
     border-radius: 0.4rem;
     transform: scale(1);
@@ -51,17 +52,11 @@
 .listing-price{
     font-size: 1.6rem;
     font-weight: normal;
-    margin-bottom: 0.8rem;
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 900px) {
-    .listing-photo{
-        height: 28rem;
-    }
-    .listing-title{
-        font-size: 1.4rem;
-    }
-    .listing-price{
-        font-size: 1.6rem;
-    }
+    
 }

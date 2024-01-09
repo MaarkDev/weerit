@@ -7,13 +7,13 @@ import ListingsContext from '../../context/ListingsContext';
 import FilterButton from './FilterButton';
 import PageNumberContext from '../../context/PageNumberContext';
 import { PriceFilterEl, SizeFilterEl, BrandFilterEl, PscFilterEl, RadiusFilterEl } from './CustomFilterEl';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 
 const Filter = () => {
     const categoryValues = ['Tričká', 'Mikiny', 'Topánky', 'Nohavice', 'Doplnky', 'Spodné prádlo', 'Plavky'];
     const sizeValues = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-    const brandValuse = ['Nike', 'Adidas', 'Converse', 'Vans', 'Rebook', 'Champion', 'OffWhite', 'Puma'];
+    const brandValuse = ['Nike', 'Adidas', 'Converse', 'Vans', 'Rebook', 'Champion', 'Puma'];
     const colorValues = ['Čierna', 'Biela', 'Červená', 'Oranžová', 'Žltá', 'Zelená', 'Modrá', 'Fialová'];
     const sortValues = ['Od najdrahšieho', 'Od najlacnejšieho', 'Od najnovšieho', 'Od najstaršieho'];
     const forValues = ['Muža', 'Ženu', 'Dieťa', 'Unisex']
@@ -25,6 +25,8 @@ const Filter = () => {
     const { query } = useContext(QueryContext);
     const { setListingsContextArr } = useContext(ListingsContext)
     const { setQPageNumber } = useContext(PageNumberContext);
+
+    const [prevFilterElementsLength, setPrevFilterElementsLength] = useState(999);
 
     const navigate = useNavigate();
 
@@ -80,8 +82,30 @@ const Filter = () => {
             return updatedFilter;
 
         });
-    };
 
+        if(filterElements.length == 1){
+            submitHandler({
+                "kategoria": [],
+                "velkost": [],
+                "velkostIna": "",
+                "znacka": [],
+                "znackaIna": "",
+                "farba": [],
+                "cenaod": "",
+                "cenado": "",
+                "zoradit": "",
+                "prekoho": [],
+                "vokoli": "",
+                "psc": "",
+                "mesto": "",
+                "coords": [
+                  0,
+                  0
+                ]
+              });
+        }
+
+    };
 
 
     useEffect(() => {
@@ -100,7 +124,6 @@ const Filter = () => {
         setFitlerElements(elements);
 
     }, [filter]);
-
 
     const addFilter = (ftype, value) => {
         const newValue = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '').toLowerCase();
@@ -149,19 +172,55 @@ const Filter = () => {
 
     const setVelkostIna = (e) => {
         const newValue = e.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '').toLowerCase();
-        setFilter((prevFilter) => ({
-            ...prevFilter,
-            velkostIna: newValue
-        }));
+
+        console.log(newValue)
+        if(sizeValues.includes(newValue.toUpperCase())){
+            addFilter('velkost', newValue);
+            setTimeout(() => {
+                setFilter((prevFilter) => ({ ...prevFilter, velkostIna: '' }));
+            }, 10)
+        }else{
+            setFilter((prevFilter) => ({
+                ...prevFilter,
+                velkostIna: newValue
+            }));
+        }
+
+        
+    }
+
+    const capitalize = (str) => {
+        if (str.length === 0) {
+            return str; 
+        }
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     const setZnackaIna = (e) => {
         const newValue = e.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '').toLowerCase();
-        setFilter((prevFilter) => ({
-            ...prevFilter,
-            znackaIna: newValue
-        }));
+        const capitalizedValue = capitalize(newValue);
+
+        console.log(capitalizedValue);
+
+        if (brandValuse.includes(capitalizedValue)) {
+            console.log("SOM V IFKU DOPICE");
+            addFilter('znacka', capitalizedValue);
+            setTimeout(() => {
+                setFilter((prevFilter) => ({ ...prevFilter, znackaIna: '' }));    
+            }, 10)
+
+        } else {
+            console.log("pohoda");
+            setFilter((prevFilter) => ({
+                ...prevFilter,
+                znackaIna: newValue
+            }));
+            return
+        }
+
+
     }
+
 
     const setCenaOd = (e) => {
         const newValue = e.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '').toLowerCase();
@@ -204,7 +263,7 @@ const Filter = () => {
         }));
     }
 
-    const submitHandler = async () => {
+    const submitHandler = async (filter) => {
         setListingsContextArr([]);
         const updatedQuery = {
             searchvalue: (query.searchvalue || ''),
@@ -253,9 +312,11 @@ const Filter = () => {
                 {filter.cenaod !== '' || filter.cenado !== '' ? <PriceFilterEl /> : <></>}
                 {filter.psc !== '' ? <PscFilterEl /> : <></>}
                 {filter.vokoli !== '' && filter.psc !== '' ? <RadiusFilterEl /> : <></>}
-                {filter.velkostIna !== '' ? <SizeFilterEl /> : <></>}
+                {filter.velkostIna != '' ? <SizeFilterEl /> : <></>}
                 {filter.znackaIna !== '' ? <BrandFilterEl /> : <></>}
+
                 {filterElements.map((item) => <FilterActive value={item} removeValueFromFilter={removeValueFromFilter} />)}
+
                 {indexes.length !== 0
                     || filter.cenaod !== ''
                     || filter.cenado !== ''
@@ -263,7 +324,7 @@ const Filter = () => {
                     || filter.vokoli !== ''
                     || filter.velkostIna !== ''
                     || filter.znackaIna !== ''
-                    ? <FilterButton submitHandler={submitHandler} /> : <></>}
+                    ? <FilterButton submitHandler={() => submitHandler(filter)} /> : <></>}
             </div>
 
         </>

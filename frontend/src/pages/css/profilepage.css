@@ -38,6 +38,11 @@
     font-size: 1.6rem;
 }
 
+.inline-buttons{
+    display: flex;
+    gap: 0.4rem;
+}
+
 .profile-page-listing-container{
     display: grid;
     grid-template-columns: repeat(6, 1fr);

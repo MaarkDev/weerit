@@ -25,7 +25,7 @@ const HomePage = () => {
     const [pageNumber, setPageNumber] = useState(0);
 
     const { setFilter } = useContext(FilterContext);
-    const { setListingsContextArr } = useContext(ListingsContext);
+    const { setListingsContextArr, listingsContextArr } = useContext(ListingsContext);
     const { query, setQuery } = useContext(QueryContext);
 
     const fetchAll = async () => {
@@ -132,7 +132,9 @@ const HomePage = () => {
 
             <Filter />
             <Catalog />
-            <MoreButton setIsFetching={setIsFetching} />
+            {
+                listingsContextArr.length > 18 ? <MoreButton setIsFetching={setIsFetching} /> : null
+            }
             {isFetching ? <LoadingPage /> : null}
         </div>
     )

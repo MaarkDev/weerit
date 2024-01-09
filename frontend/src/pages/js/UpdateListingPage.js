@@ -253,7 +253,6 @@ const CreateListingPage = () => {
                         <label className='new-listing-image-label'>
                             <p className='new-listing-image-info'>+ Pridaj fotky <span className='red'><strong>*</strong></span></p>
                             <br />
-                            <span>Pridaj fotky pre tvoj inzerát</span>
                             {imageUrls?.length == 0 ? <input
                                 type='file'
                                 name='images'
