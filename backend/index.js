@@ -42,7 +42,7 @@ app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
 
-mongoose.connect(process.env.MONGO_URI_DEV)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     // Listen for requests
     app.listen(PORT, () => {
