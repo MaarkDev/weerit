@@ -26,9 +26,9 @@ app.use(
       name: "__session",
       keys: ["weerit"],
       maxAge: 24 * 60 * 60 * 100,
-      secure: true, // COMMENT IN DEV
+      //secure: true, // COMMENT IN DEV
       httpOnly: true,
-      sameSite: 'none' // COMMENT IN DEV
+      //sameSite: 'none' // COMMENT IN DEV
     })
 );
 
@@ -42,7 +42,7 @@ app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI_DEV)
   .then(() => {
     // Listen for requests
     app.listen(PORT, () => {

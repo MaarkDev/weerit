@@ -70,7 +70,7 @@ const ProductPage = () => {
                     setIsLoading(false)
                 }
             } catch (e) {
-                console.error(e)
+                console.error(e);
             }
 
         }

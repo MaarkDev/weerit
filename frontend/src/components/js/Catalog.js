@@ -10,7 +10,9 @@ const Catalog = () => {
         <div className='catalog-container'>
             <div className='catalog-grid'>
                 {listingsContextArr.map((item) => {
-                    return (<Listing uid={item.uid} title={item.nazov} source={item.fotky[0]} place={item.mesto} price={item.cena} />)
+                    return (<Listing uid={item.uid} 
+                        title={item.nazov} source={item.fotky[0]} 
+                        place={item.mesto} price={item.cena} />)
                 })}
             </div>
         </div>
