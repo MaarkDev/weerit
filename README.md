@@ -2,6 +2,7 @@
 ## Internetovy bazar 
 # Technologie:
  **React.js, Express js, Node.js, MongoDB**  
+   
  **Google Maps integracie** -> pre filtrovanie inzeratov podla polohy a vzdialenosti  
  **Cloudinary** -> pre ukladanie obrazkov pridavanych k inzeratom  
  **Passport.js** -> OAuth2 kniznica pre prihlasovanie pomocou google uctu  
